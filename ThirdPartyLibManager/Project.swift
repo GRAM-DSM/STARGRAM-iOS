@@ -10,7 +10,6 @@ let project = Project.dynamicFramework(
     ],
     dependencies: [
         .SPM.RxSwift,
-        .SPM.RxCocoa,
         .SPM.Moya,
         .SPM.KeychainSwift
     ]
