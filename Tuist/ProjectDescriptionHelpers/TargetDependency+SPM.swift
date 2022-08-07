@@ -6,7 +6,6 @@ extension TargetDependency {
 
 public extension TargetDependency.SPM {
     static let RxSwift = TargetDependency.package(product: "RxSwift")
-    static let RxCocoa = TargetDependency.package(product: "Rxcocoa")
     static let Moya = TargetDependency.package(product: "Moya")
     static let KeychainSwift = TargetDependency.package(product: "KeychainSwift")
 }
