@@ -30,7 +30,7 @@ extension StarGramAPI {
 }
 
 enum ApiDomain: String {
-    case users
+    case auths
     case profiles
     case feeds
 }
