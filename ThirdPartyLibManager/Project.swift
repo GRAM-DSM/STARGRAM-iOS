@@ -11,6 +11,7 @@ let project = Project.dynamicFramework(
     dependencies: [
         .SPM.RxSwift,
         .SPM.Moya,
-        .SPM.KeychainSwift
+        .SPM.KeychainSwift,
+        .SPM.RxMoya
     ]
 )
