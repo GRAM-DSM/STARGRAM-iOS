@@ -73,12 +73,12 @@ extension ProfileAPI: StarGramAPI {
     }
 
     var headers: [String : String]? {
-        let token = KeychainService.shared.fetchAccessToken()
+        let token = KeychainService.shared.fetchAccessToken() ?? ""
         switch self {
         case .writeProfile, .patchProfile:
-            return ["Authorization" : "Bearer \(token)", "Content-Type" : "multipart/form-data"]
+            return ["Authorization": "Bearer \(token)", "Content-Type": "multipart/form-data"]
         default:
-            return ["Authorization" : "Bearer \(token)"]
+            return ["Authorization": "Bearer \(token)"]
         }
     }
 }
