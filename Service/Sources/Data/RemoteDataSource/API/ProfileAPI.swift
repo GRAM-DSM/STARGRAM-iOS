@@ -72,7 +72,7 @@ extension ProfileAPI: StarGramAPI {
         }
     }
 
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         let token = KeychainService.shared.fetchAccessToken() ?? ""
         switch self {
         case .writeProfile, .patchProfile:

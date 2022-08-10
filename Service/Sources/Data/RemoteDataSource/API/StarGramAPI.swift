@@ -19,7 +19,7 @@ extension StarGramAPI {
         return .requestPlain
     }
 
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         default:
             return ["Content-Type": "application/json"]
