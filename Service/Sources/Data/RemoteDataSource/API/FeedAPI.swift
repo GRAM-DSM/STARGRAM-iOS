@@ -10,8 +10,8 @@ enum FeedAPI {
     case fetchFeeds
     case fetchFeedDetail(_ feedId: String)
     case createComment(_ request: CommentRequest)
-    case patchComment(_ commentId: String, _ request: CommentRequest)
-    case deleteComment(_ commendId: String)
+    case patchComment(_ commentId: Int, _ request: CommentRequest)
+    case deleteComment(_ commentId: Int)
     case like(_ feedId: String)
     case unLike(_ feedId: String)
     case favorite(_ feedId: String)

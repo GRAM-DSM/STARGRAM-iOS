@@ -8,7 +8,7 @@ enum ProfileAPI {
     case deleteProfileImage
     case fetchProfile
     case fetchWritingFeeds
-    case fetchFavoriteFees
+    case fetchFavoriteFeeds
 }
 
 extension ProfileAPI: StarGramAPI {
@@ -21,7 +21,7 @@ extension ProfileAPI: StarGramAPI {
         switch self {
         case .fetchWritingFeeds:
             return "/feeds"
-        case .fetchFavoriteFees:
+        case .fetchFavoriteFeeds:
             return "/favorites"
         default:
             return ""
