@@ -1,6 +1,5 @@
 import Foundation
 
-
 struct SignupRequest: Encodable {
     private enum CodingKeys: String, CodingKey {
         case id = "account_id"
