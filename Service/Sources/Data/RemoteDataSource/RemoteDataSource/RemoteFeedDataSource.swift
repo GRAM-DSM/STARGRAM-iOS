@@ -31,11 +31,10 @@ final class RemoteFeedDataSource: MoyaProvider<FeedAPI> {
             .map { $0.toDomain() }
     }
 
-    func fetchFeeds() -> Observable<[Feed]> {
+    func fetchFeeds() -> Single<[Feed]> {
         return self.rx.request(.fetchFeeds)
             .map(FeedListResponse.self)
             .map { $0.toDomain() }
-            .asObservable()
     }
 
     func fetchFeedDetail(_ feedId: String) -> Single<FeedDetail> {
