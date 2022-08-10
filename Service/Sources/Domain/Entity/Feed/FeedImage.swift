@@ -1,5 +1,5 @@
 import Foundation
 
-struct FeedImage: Equatable {
-    let url: String
+public struct FeedImage: Equatable {
+    public let url: String
 }
