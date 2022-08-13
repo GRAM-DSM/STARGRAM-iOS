@@ -2,25 +2,25 @@ import SwiftUI
 
 extension Font {
     // MARK: - Title
-    static let title1 = custom("NotoSansKR-Regular", fixedSize: 25)
-    static let title2 = custom("NotoSansKR-Medium", fixedSize: 25)
-    static let title3 = custom("NotoSansKR-Bold", fixedSize: 20)
+    static let title100 = custom("NotoSansKR-Regular", fixedSize: 25)
+    static let title200 = custom("NotoSansKR-Medium", fixedSize: 25)
+    static let title300 = custom("NotoSansKR-Bold", fixedSize: 20)
 
     // MARK: - Body
-    static let body1 = custom("NotoSansKR-Regular", fixedSize: 18)
-    static let body2 = custom("NotoSansKR-Regular", fixedSize: 16)
-    static let body3 = custom("NotoSansKR-Regular", fixedSize: 15)
-    static let body4 = custom("NotoSansKR-Regular", fixedSize: 14)
-    static let body5 = custom("NotoSansKR-Regular", fixedSize: 13)
+    static let body100 = custom("NotoSansKR-Regular", fixedSize: 18)
+    static let body200 = custom("NotoSansKR-Regular", fixedSize: 16)
+    static let body300 = custom("NotoSansKR-Regular", fixedSize: 15)
+    static let body400 = custom("NotoSansKR-Regular", fixedSize: 14)
+    static let body500 = custom("NotoSansKR-Regular", fixedSize: 13)
 
     // MARK: - Button
-    static let button1 = custom("NotoSansKR-Bold", fixedSize: 18)
-    static let button2 = custom("NotoSansKR-Bold", fixedSize: 16)
-    static let button3 = custom("NotoSansKR-Medium", fixedSize: 15)
-    static let button4 = custom("NotoSansKR-Bold", fixedSize: 14)
-    static let button5 = custom("NotoSansKR-Medium", fixedSize: 10)
+    static let button100 = custom("NotoSansKR-Bold", fixedSize: 18)
+    static let button200 = custom("NotoSansKR-Bold", fixedSize: 16)
+    static let button300 = custom("NotoSansKR-Medium", fixedSize: 15)
+    static let button400 = custom("NotoSansKR-Bold", fixedSize: 14)
+    static let button500 = custom("NotoSansKR-Medium", fixedSize: 10)
 
     // MARK: - Small
-    static let small1 = custom("NotoSansKR-Regular", fixedSize: 12)
-    static let small2 = custom("NotoSansKR-Regular", fixedSize: 10)
+    static let small100 = custom("NotoSansKR-Regular", fixedSize: 12)
+    static let small200 = custom("NotoSansKR-Regular", fixedSize: 10)
 }
