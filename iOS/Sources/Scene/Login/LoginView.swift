@@ -17,15 +17,9 @@ struct LoginView: View {
             )
             Spacer()
                 .frame(height: 40)
-            LoginButton(
-                action: {
-                    print("로그인")
-                },
-                isDisable: .constant(viewModel.id == "" || viewModel.password == "")
-            )
-            Spacer()
-                .frame(height: 14)
-            MoveSignUpButton()
+            ButtonView(
+                isDisabled: .constant(viewModel.id == "" || viewModel.password == ""),
+                action: { })
             Spacer()
         }
     }
