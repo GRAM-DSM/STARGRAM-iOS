@@ -1,3 +1,3 @@
 import ProjectDescription
 
-let stargramOrganizationName: String = "com.GRAM"
+let stargramOrganizationName: String = "com.GRAM-DSM"
