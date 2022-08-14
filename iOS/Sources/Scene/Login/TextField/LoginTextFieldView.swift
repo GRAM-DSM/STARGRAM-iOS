@@ -6,36 +6,17 @@ struct LoginTextFieldView: View {
     @Binding var password: String
 
     var body: some View {
-        VStack(spacing: 12) {
-            LoginTextField(
+        VStack(spacing: 0) {
+            AuthTextField(
                 placeholder: "아이디",
-                text: $id,
-                entry: .constant(false)
-            ).padding(.horizontal, 46)
-            ZStack {
-                LoginTextField(
-                    placeholder: "비밀번호",
-                    text: $password,
-                    entry: $entry
-                )
-                HStack {
-                    Spacer()
-                    Button {
-                        entry.toggle()
-                    } label: {
-                        if entry {
-                            Image(systemName: "eye")
-                        } else {
-                            Image(systemName: "eye.slash")
-                        }
-                    }
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.gray1)
-                    Spacer()
-                        .frame(width: 14)
-                }
-            }.padding(.horizontal, 46)
-        }
+                text: $id
+            )
+            AuthTextField(
+                placeholder: "비밀번호",
+                isSecret: true,
+                text: $password
+            )
+        }.padding(.horizontal, 46)
     }
 }
 
