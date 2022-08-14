@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.excutable(
-    name: "STARGRAM",
+    name: "STARGRAM-iOS",
     platform: .iOS,
     deploymentDevice: .iphone,
     dependencies: [
