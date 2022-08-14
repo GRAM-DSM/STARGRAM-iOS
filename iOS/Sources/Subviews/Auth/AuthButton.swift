@@ -4,21 +4,24 @@ struct AuthButton: View {
     @Binding var isDisabled: Bool
     var text: String
     var action: () -> Void
+    var font: Font
 
     init(
         isDisabled: Binding<Bool> = .constant(false),
         text: String,
-        action: @escaping () -> Void
+        action: @escaping () -> Void,
+        font: Font = .button100
     ) {
         self._isDisabled = isDisabled
         self.text = text
         self.action = action
+        self.font = font
     }
     var body: some View {
         Button(action: action) {
             Text(text)
                 .foregroundColor(.white)
-                .font(.button100)
+                .font(font)
                 .frame(
                     maxWidth: .infinity,
                     maxHeight: 51)
