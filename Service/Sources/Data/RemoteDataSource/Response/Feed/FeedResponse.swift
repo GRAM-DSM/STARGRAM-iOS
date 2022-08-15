@@ -8,6 +8,7 @@ struct FeedResponse: Decodable {
         case created = "create_at"
         case heartCount = "heart_count"
         case commentCount = "comment_count"
+        case imageUrlString = "image"
         case heartStatus = "heart_status"
     }
     let id: String
@@ -16,6 +17,7 @@ struct FeedResponse: Decodable {
     let created: String
     let heartCount: Int
     let commentCount: Int
+    let imageUrlString: String
     let heartStatus: Bool
 }
 
@@ -28,6 +30,7 @@ extension FeedResponse {
             created: created.toDate(),
             heartCount: heartCount,
             commentCount: commentCount,
+            imageUrl: URL(string: imageUrlString)!,
             heartStatus: heartStatus
         )
     }
