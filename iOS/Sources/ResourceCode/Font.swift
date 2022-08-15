@@ -4,7 +4,8 @@ extension Font {
     // MARK: - Title
     static let title100 = custom("NotoSansKR-Regular", fixedSize: 25)
     static let title200 = custom("NotoSansKR-Medium", fixedSize: 25)
-    static let title300 = custom("NotoSansKR-Bold", fixedSize: 20)
+    static let title300 = custom("NotoSansKR-Bold", size: 22)
+    static let title400 = custom("NotoSansKR-Bold", fixedSize: 20)
 
     // MARK: - Body
     static let body100 = custom("NotoSansKR-Regular", fixedSize: 18)
