@@ -7,5 +7,6 @@ public struct Feed: Equatable {
     public let created: Date
     public let heartCount: Int
     public let commentCount: Int
+    public let imageUrl: URL
     public let heartStatus: Bool
 }
