@@ -2,7 +2,11 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text("홈화면입니다.")
+        VStack(spacing: 3) {
+            HomeTitle()
+            Image("BackImage")
+                .padding(.horizontal, 16)
+        }
     }
 }
 
