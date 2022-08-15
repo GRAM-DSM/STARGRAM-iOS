@@ -6,7 +6,9 @@ struct AppDependency {
 
 extension AppDependency {
     static func resolve() -> AppDependency {
-        let homeView = HomeView()
+        let homeViewModel = HomeViewModel()
+
+        let homeView = HomeView(viewModel: homeViewModel)
         let searchView = SearchView()
         let writeView = WriteView()
         let profileView = ProfileView()
