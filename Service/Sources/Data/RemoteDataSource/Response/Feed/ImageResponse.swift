@@ -9,7 +9,7 @@ extension ImageResponse {
     func toDomain() -> Image {
         return .init(
             older: older,
-            image: image
+            imageUrl: URL(string: image)!
         )
     }
 }
