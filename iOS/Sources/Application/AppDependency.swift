@@ -7,11 +7,12 @@ struct AppDependency {
 extension AppDependency {
     static func resolve() -> AppDependency {
         let homeViewModel = HomeViewModel()
+        let profileViewModel = ProfileViewModel()
 
         let homeView = HomeView(viewModel: homeViewModel)
         let searchView = SearchView()
         let writeView = WriteView()
-        let profileView = ProfileView()
+        let profileView = ProfileView(viewModel: profileViewModel)
 
         let mainView = MainView(
             homeView: homeView,
