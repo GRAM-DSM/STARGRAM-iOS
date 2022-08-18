@@ -11,7 +11,9 @@ struct HomeView: View {
                 .padding(.horizontal, 16)
             List(viewModel.feeds, id: \.id) { feed in
                 HomeListCell(item: feed)
-            }.padding(.horizontal, 16)
+            }
+            .listStyle(.inset)
+            .padding(.horizontal, 16)
         }
     }
 }

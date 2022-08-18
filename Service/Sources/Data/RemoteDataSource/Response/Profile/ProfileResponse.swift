@@ -12,8 +12,8 @@ extension ProfileResponse {
         return .init(
             name: name,
             introduce: introduce,
-            link: URL(string: link)!,
-            image: URL(string: image)!
+            link: link,
+            image: image
         )
     }
 }
