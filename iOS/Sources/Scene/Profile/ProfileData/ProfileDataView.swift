@@ -29,7 +29,8 @@ struct ProfileDataView: View {
                     ).font(.small200)
                 }
                 NavigationLink(
-                    destination: EditProfileView()
+                    destination:
+                        AppDependency.resolve().editProfileView
                 ) {
                     Text("프로필 수정")
                         .font(.button500)
