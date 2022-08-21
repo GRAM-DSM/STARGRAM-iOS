@@ -2,7 +2,7 @@ import Foundation
 
 public struct FeedDetail: Equatable {
     public let id: String
-    public let profileImageUrl: URL
+    public let profileImageUrl: String
     public let name: String
     public let title: String
     public let content: String
@@ -11,12 +11,12 @@ public struct FeedDetail: Equatable {
     public let heartCount: Int
     public let commentCount: Int
     public let favorite: Bool
-    public let images: [Image]
+    public let images: [DetailImage]
     public let comments: [Comment]
 
     public init(
         id: String,
-        profileImageUrl: URL,
+        profileImageUrl: String,
         name: String,
         title: String,
         content: String,
@@ -25,7 +25,7 @@ public struct FeedDetail: Equatable {
         heartCount: Int,
         commentCount: Int,
         favorite: Bool,
-        images: [Image],
+        images: [DetailImage],
         comments: [Comment]
     ) {
         self.id = id

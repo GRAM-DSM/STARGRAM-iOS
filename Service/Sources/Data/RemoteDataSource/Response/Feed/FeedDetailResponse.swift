@@ -33,7 +33,7 @@ extension FeedDetailRepsponse {
     func toDomain() -> FeedDetail {
         return .init(
             id: id,
-            profileImageUrl: URL(string: profileImageUrlString)!,
+            profileImageUrl: profileImageUrlString,
             name: name,
             title: title,
             content: content,
