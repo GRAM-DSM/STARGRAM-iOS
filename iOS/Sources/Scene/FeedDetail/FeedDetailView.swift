@@ -17,7 +17,7 @@ struct FeedDetailView: View {
                     .foregroundColor(.orange1)
                     .frame(width: 10, height: 10)
             }
-            Text("AOP가 뭔가요?")
+            Text(viewModel.feedDetail.title)
                 .font(.title500)
                 .padding(.top, 13)
                 .padding(.bottom, 11)
@@ -28,28 +28,44 @@ struct FeedDetailView: View {
                 created: Date(),
                 isPressed: .constant(false)
             ).padding(.bottom, 19)
-            ZStack {
+            ZStack(alignment: .bottom) {
                 FeedDetailTabView(images: viewModel.feedDetail.images)
                     .frame(height: 290)
-                HStack(alignment: .bottom) {
+                HStack(
+                    alignment: .center,
+                    spacing: 0
+                ) {
+                    Spacer()
+                        .frame(width: 28)
                     Button {
                         viewModel.heartIsClick.toggle()
                     } label: {
                         Image(systemName: viewModel.heartIsClick ? "heart.fill" : "heart")
                             .foregroundColor(.orange1)
                     }
+                    Spacer()
+                        .frame(width: 7)
                     Text("\(viewModel.feedDetail.heartCount)")
                         .font(.button500)
+                        .padding(.trailing, 18)
                     Button {
                         viewModel.heartIsClick.toggle()
                     } label: {
                         Image(systemName: "bubble.left")
                             .foregroundColor(.orange1)
                     }
-                    Text("\(viewModel.feedDetail.heartCount)")
+                    Spacer()
+                        .frame(width: 7)
+                    Text("\(viewModel.feedDetail.commentCount)")
                         .font(.button500)
+                    Spacer()
                 }
+                .padding(.bottom, 14)
             }
+            TextEditor(text: $viewModel.feedDetail.content)
+                .disabled(true)
+                .font(.body400)
+                .padding(.horizontal, 16)
         }
     }
 }
