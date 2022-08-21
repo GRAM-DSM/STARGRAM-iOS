@@ -15,7 +15,7 @@ struct FeedDetailTabView: View {
             ForEach(images, id: \.older) {
                 ImageView(image: $0.imageUrl)
             }
-        }
+        }.tabViewStyle(PageTabViewStyle())
     }
 }
 
