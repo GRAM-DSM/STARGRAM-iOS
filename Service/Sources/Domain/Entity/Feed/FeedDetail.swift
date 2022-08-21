@@ -5,7 +5,7 @@ public struct FeedDetail: Equatable {
     public let profileImageUrl: String
     public let name: String
     public let title: String
-    public let content: String
+    public var content: String
     public let created: Date
     public let category: String
     public let heartCount: Int
