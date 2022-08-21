@@ -15,7 +15,10 @@ class FeedDetailViewModel: ObservableObject {
         heartCount: 3,
         commentCount: 3,
         favorite: false,
-        images: [],
+        images: [
+            .init(older: 0, imageUrl: ""),
+            .init(older: 1, imageUrl: "")
+        ],
         comments: []
     )
 }
