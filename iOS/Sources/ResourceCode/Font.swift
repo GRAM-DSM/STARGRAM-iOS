@@ -14,6 +14,8 @@ extension Font {
     static let body300 = custom("NotoSansKR-Regular", fixedSize: 15)
     static let body400 = custom("NotoSansKR-Regular", fixedSize: 14)
     static let body500 = custom("NotoSansKR-Regular", fixedSize: 13)
+    static let body600 = custom("NotoSansKR-Medium", size: 12)
+    static let body700 = custom("NotoSansKR-Medium", size: 14)
 
     // MARK: - Button
     static let button100 = custom("NotoSansKR-Bold", fixedSize: 18)
