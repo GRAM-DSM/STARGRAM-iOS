@@ -5,6 +5,7 @@ extension Color {
     static let gray1 = Color("808080")
     static let gray2 = Color("D9D9D9")
     static let gray3 = Color("E0E0E0")
+    static let gray4 = Color("BABABA")
 
     // MARK: - Orange
     static let orange1 = Color("F29A26")

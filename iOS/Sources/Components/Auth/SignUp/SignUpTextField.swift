@@ -21,7 +21,7 @@ struct SignUpTextField: View {
             )
             .padding(.trailing, 6)
             AuthButton(
-                isDisabled: .constant(text == ""),
+                isDisabled: .constant(text.isEmpty),
                 text: buttonTitle,
                 action: action,
                 font: .button400

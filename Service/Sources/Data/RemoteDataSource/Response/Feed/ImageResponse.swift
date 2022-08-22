@@ -6,10 +6,10 @@ struct ImageResponse: Decodable {
 }
 
 extension ImageResponse {
-    func toDomain() -> Image {
+    func toDomain() -> DetailImage {
         return .init(
             older: older,
-            imageUrl: URL(string: image)!
+            imageUrl: image
         )
     }
 }

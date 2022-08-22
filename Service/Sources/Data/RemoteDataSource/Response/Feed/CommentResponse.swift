@@ -19,7 +19,7 @@ extension CommentResponse {
     func toDomain() -> Comment {
         return .init(
             commentId: commentId,
-            profileImageUrl: URL(string: profileImageUrlString)!,
+            profileImageUrl: profileImageUrlString,
             name: name,
             content: content,
             created: created.toDate()

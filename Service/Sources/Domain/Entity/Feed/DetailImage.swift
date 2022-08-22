@@ -1,12 +1,12 @@
 import Foundation
 
-public struct Image: Equatable {
+public struct DetailImage: Equatable {
     public let older: Int
-    public let imageUrl: URL
+    public let imageUrl: String
 
     public init(
         older: Int,
-        imageUrl: URL
+        imageUrl: String
     ) {
         self.older = older
         self.imageUrl = imageUrl
