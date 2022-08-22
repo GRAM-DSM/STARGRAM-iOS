@@ -18,7 +18,7 @@ struct LoginView: View {
             Spacer()
                 .frame(height: 40)
             ButtonView(
-                isDisabled: .constant(viewModel.id == "" || viewModel.password == ""),
+                isDisabled: .constant(viewModel.id.isEmpty || viewModel.password.isEmpty),
                 action: { })
             Spacer()
         }
