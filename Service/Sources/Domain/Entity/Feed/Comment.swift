@@ -2,14 +2,14 @@ import Foundation
 
 public struct Comment: Equatable {
     public let commentId: Int
-    public let profileImageUrl: URL
+    public let profileImageUrl: String
     public let name: String
     public let content: String
     public let created: Date
 
     public init(
         commentId: Int,
-        profileImageUrl: URL,
+        profileImageUrl: String,
         name: String,
         content: String,
         created: Date
