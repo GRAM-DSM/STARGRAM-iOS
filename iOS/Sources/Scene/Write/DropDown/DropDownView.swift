@@ -15,8 +15,13 @@ struct DropDownView: View {
                     self.major = maj
                 } label: {
                     DropDownButton(
-                        isPressend: .constant(false),
+                        isPressend: .constant(major == maj),
                         major: maj
+                    )
+                    .border(
+                        width: maj == "기타" ? 0 : 1,
+                        edges: [.bottom],
+                        color: .gray2
                     )
                 }
             }
