@@ -22,11 +22,6 @@ struct DropDownButton: View {
             maxWidth: .infinity,
             maxHeight: 38
         )
-        .border(
-            width: 1,
-            edges: [.bottom],
-            color: .gray2
-        )
     }
 }
 
