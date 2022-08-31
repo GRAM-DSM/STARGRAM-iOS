@@ -2,6 +2,7 @@ import SwiftUI
 import Service
 
 struct ProfileDataView: View {
+    var editProfileView: EditProfileView
     let profile: Profile
 
     var body: some View {
@@ -29,8 +30,7 @@ struct ProfileDataView: View {
                     ).font(.small200)
                 }
                 NavigationLink(
-                    destination:
-                        AppDependency.resolve().editProfileView
+                    destination: editProfileView
                 ) {
                     Text("프로필 수정")
                         .font(.button500)
@@ -44,17 +44,5 @@ struct ProfileDataView: View {
                 )
             }
         }
-    }
-}
-
-struct ProfileDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileDataView(profile: .init(
-            name: "김기영",
-            introduce: "안녕하세요 김기영입니다.",
-            link: "http://github.com/rlarldud1234",
-            image: ""
-        )
-        )
     }
 }
