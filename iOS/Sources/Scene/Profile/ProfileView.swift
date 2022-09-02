@@ -2,12 +2,15 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
+    var editProfileView: EditProfileView
+
     var body: some View {
         NavigationView {
             VStack {
                 Spacer()
                     .frame(height: 37)
                 ProfileDataView(
+                    editProfileView: editProfileView,
                     profile: viewModel.profile
                 )
                 Spacer()
@@ -34,12 +37,5 @@ struct ProfileView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
         }
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = ProfileViewModel()
-        ProfileView(viewModel: viewModel)
     }
 }
