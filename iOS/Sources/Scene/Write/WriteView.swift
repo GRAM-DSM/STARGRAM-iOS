@@ -55,6 +55,7 @@ struct WriteView: View {
                                 Text("내용을 입력하세요.")
                                     .font(.body500)
                                     .foregroundColor(.gray1)
+                                    .padding(.top, 7)
                                     .padding(.leading, 33)
                             }
                         }
