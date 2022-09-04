@@ -1,13 +1,35 @@
 import SwiftUI
 
 struct SearchView: View {
+    @StateObject var viewModel: SearchViewModel
+
     var body: some View {
-        Text("검색 화면입니다.")
+        NavigationView {
+            VStack {
+                Text("검색화면입니다.")
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    SearchBar(
+                        action: {
+                            print("search")
+                        },
+                        text: $viewModel.searchText
+                    )
+                }
+            }
+            .navigationBarColor(
+                .orange1,
+                textColor: .white
+            )
+        }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        let viewModel = SearchViewModel()
+        SearchView(viewModel: viewModel)
     }
 }
