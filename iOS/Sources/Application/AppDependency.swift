@@ -13,13 +13,18 @@ extension AppDependency {
         let loginViewModel = LoginViewModel()
         let signUpViewModel = SignUpViewModel()
         let writeViewModel = WriteViewModel()
+        let searchViewModel = SearchViewModel()
 
         // MARK: View
         let homeView = HomeView(
             viewModel: homeViewModel
         )
-        let searchView = SearchView()
-        let writeView = WriteView(viewModel: writeViewModel)
+        let searchView = SearchView(
+            viewModel: searchViewModel
+        )
+        let writeView = WriteView(
+            viewModel: writeViewModel
+        )
         let editProfileView = EditProfileView(
             viewModel: editProfileViewModel
         )
