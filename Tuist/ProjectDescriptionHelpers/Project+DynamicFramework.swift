@@ -7,9 +7,7 @@ extension Project {
         platform: Platform = .iOS,
         packages: [Package] = [],
         infoPlist: InfoPlist = .default,
-        dependencies: [TargetDependency] = [
-            .project(target: "ThirdPartyLibManager", path: "../ThirdPartyLibManager")
-        ]
+        dependencies: [TargetDependency]
     ) -> Project {
         return Project(
             name: name,
@@ -27,11 +25,13 @@ extension Project {
                     ),
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
-                    scripts: [.swiftlint],
+                    scripts: [
+                        .swiftLintScript,
+                        .removeStaticFrameworksScripts
+                    ],
                     dependencies: dependencies
                 )
             ]
         )
     }
-
 }
