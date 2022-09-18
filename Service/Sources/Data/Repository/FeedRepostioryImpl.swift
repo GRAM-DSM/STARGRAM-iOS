@@ -38,7 +38,7 @@ class FeedRepositoryImpl: FeedRepository {
         return remoteFeedDataSource.deleteFeed(feedId)
     }
 
-    func uploadImage(_ images: [Data]) -> Single<[FeedImage]> {
+    func uploadImage(_ images: [Data]) -> Single<FeedImage> {
         return remoteFeedDataSource.uploadImage(images)
     }
 

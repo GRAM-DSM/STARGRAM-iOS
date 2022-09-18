@@ -10,7 +10,7 @@ public class UploadImageUseCase {
         self.repository = repository
     }
 
-    public func excute(images: [Data]) -> Single<[FeedImage]> {
+    public func excute(images: [Data]) -> Single<FeedImage> {
         return repository.uploadImage(images)
     }
 }
