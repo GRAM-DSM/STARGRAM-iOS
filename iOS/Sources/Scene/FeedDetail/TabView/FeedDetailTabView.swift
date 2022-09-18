@@ -2,9 +2,9 @@ import SwiftUI
 import Service
 
 struct FeedDetailTabView: View {
-    var images: [DetailImage]
+    var images: [String]
 
-    init(images: [DetailImage]) {
+    init(images: [String]) {
         self.images = images
         UIPageControl.appearance().currentPageIndicatorTintColor = .init(named: "F29A26")
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.init(named: "F29A26")?.withAlphaComponent(0.2)
@@ -12,8 +12,8 @@ struct FeedDetailTabView: View {
 
     var body: some View {
         TabView {
-            ForEach(images, id: \.older) {
-                ImageView(image: $0.imageUrl)
+            ForEach(images, id: \.self) {
+                ImageView(image: $0)
             }
         }.tabViewStyle(PageTabViewStyle())
     }
