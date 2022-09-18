@@ -1,7 +1,7 @@
 import ProjectDescription
 
 extension Project {
-
+    
     public static func excutable(
         name: String,
         platform: Platform,
@@ -26,13 +26,10 @@ extension Project {
                     infoPlist: .file(path: Path("SupportingFiles/Info.plist")),
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
-                    scripts: [.swiftlint],
-                    dependencies: [
-                        .project(target: "ThirdPartyLibManager", path: "../ThirdPartyLibManager")
-                    ] + dependencies
+                    scripts: [.swiftLintScript],
+                    dependencies: dependencies
                 )
             ]
         )
     }
-
 }
