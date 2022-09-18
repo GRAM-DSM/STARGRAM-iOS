@@ -6,6 +6,7 @@ let project = Project.excutable(
     platform: .iOS,
     deploymentDevice: .iphone,
     dependencies: [
+        .project(target: "ThirdPartyLibManager", path: "../ThirdPartyLibManager"),
         .project(target: "Service", path: "../Service")
         ]
 )
