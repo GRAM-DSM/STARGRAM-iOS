@@ -11,7 +11,7 @@ public struct FeedDetail: Equatable {
     public let heartCount: Int
     public let commentCount: Int
     public let favorite: Bool
-    public let images: [DetailImage]
+    public let images: [String]
     public let comments: [Comment]
 
     public init(
@@ -25,7 +25,7 @@ public struct FeedDetail: Equatable {
         heartCount: Int,
         commentCount: Int,
         favorite: Bool,
-        images: [DetailImage],
+        images: [String],
         comments: [Comment]
     ) {
         self.id = id

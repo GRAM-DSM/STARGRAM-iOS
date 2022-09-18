@@ -25,7 +25,7 @@ struct FeedDetailRepsponse: Decodable {
     let heartCount: Int
     let commentCount: Int
     let favorite: Bool
-    let images: [ImageResponse]
+    let images: [String]
     let comments: [CommentResponse]
 }
 
@@ -42,7 +42,7 @@ extension FeedDetailRepsponse {
             heartCount: heartCount,
             commentCount: commentCount,
             favorite: favorite,
-            images: images.map { $0.toDomain() },
+            images: images,
             comments: comments.map { $0.toDomain() }
         )
     }

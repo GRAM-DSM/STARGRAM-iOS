@@ -21,8 +21,10 @@ extension AuthAPI: StarGramAPI {
         switch self {
         case .signin:
             return "/login"
-        case .verificationEmail, .checkVerificationEmail:
+        case .verificationEmail:
             return "/email"
+        case .checkVerificationEmail:
+            return "/email/check"
         default:
             return ""
         }
@@ -32,8 +34,6 @@ extension AuthAPI: StarGramAPI {
         switch self {
         case .refreshToken:
             return .put
-        case .verificationEmail, .checkId:
-            return .get
         default:
             return .post
         }
