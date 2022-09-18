@@ -25,9 +25,9 @@ final class RemoteFeedDataSource: MoyaProvider<FeedAPI> {
             .asCompletable()
     }
 
-    func uploadImage(_ images: [Data]) -> Single<[FeedImage]> {
+    func uploadImage(_ images: [Data]) -> Single<FeedImage> {
         return self.rx.request(.uploadImage(images))
-            .map(FeedImageListResponse.self)
+            .map(FeedImageResponse.self)
             .map { $0.toDomain() }
     }
 
