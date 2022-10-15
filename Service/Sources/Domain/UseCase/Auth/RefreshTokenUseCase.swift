@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class RefreshTokenUseCase {
 
@@ -10,7 +10,7 @@ public class RefreshTokenUseCase {
         self.repository = repository
     }
 
-    public func excute() -> Completable {
+    public func excute() -> AnyPublisher<Void, STARGRAMError> {
         return repository.refreshToken()
     }
 }
