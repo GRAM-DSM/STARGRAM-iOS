@@ -1,8 +1,8 @@
 import Foundation
 
 import Moya
-import RxSwift
-import RxMoya
+import Combine
+import CombineMoya
 
 final class RemoteFeedDataSource: MoyaProvider<FeedAPI> {
 
@@ -10,74 +10,67 @@ final class RemoteFeedDataSource: MoyaProvider<FeedAPI> {
 
     private init() { }
 
-    func createFeed(_ request: CreateFeedRequest) -> Completable {
-        return self.rx.request(.createFeed(request))
-            .asCompletable()
+    func createFeed(_ request: CreateFeedRequest) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.createFeed(request))
     }
 
-    func patchFeed(_ feedId: String, _ request: PatchFeedRequest) -> Completable {
-        return self.rx.request(.patchFeed(feedId, request))
-            .asCompletable()
+    func patchFeed(
+        _ feedId: String,
+        _ request: PatchFeedRequest
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.patchFeed(feedId, request))
     }
 
-    func deleteFeed(_ feedId: String) -> Completable {
-        return self.rx.request(.deleteFeed(feedId))
-            .asCompletable()
+    func deleteFeed(_ feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.deleteFeed(feedId))
     }
 
-    func uploadImage(_ images: [Data]) -> Single<FeedImage> {
-        return self.rx.request(.uploadImage(images))
-            .map(FeedImageResponse.self)
+    func uploadImage(_ images: [Data]) -> AnyPublisher<FeedImage, STARGRAMError> {
+        return self.requestPublisher(.uploadImage(images), FeedImageResponse.self)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 
-    func fetchFeeds() -> Single<[Feed]> {
-        return self.rx.request(.fetchFeeds)
-            .map(FeedListResponse.self)
+    func fetchFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
+        return self.requestPublisher(.fetchFeeds, FeedListResponse.self)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 
-    func fetchFeedDetail(_ feedId: String) -> Single<FeedDetail> {
-        return self.rx.request(.fetchFeedDetail(feedId))
-            .map(FeedDetailRepsponse.self)
+    func fetchFeedDetail(_ feedId: String) -> AnyPublisher<FeedDetail, STARGRAMError> {
+        return self.requestPublisher(.fetchFeedDetail(feedId), FeedDetailRepsponse.self)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 
-    func createComment(_ request: CommentRequest) -> Completable {
-        return self.rx.request(.createComment(request))
-            .asCompletable()
+    func createComment(_ request: CommentRequest) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.createComment(request))
     }
 
     func patchComment(
         _ commentId: Int,
         _ request: CommentRequest
-    ) -> Completable {
-        return self.rx.request(.patchComment(commentId, request))
-            .asCompletable()
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.patchComment(commentId, request))
     }
 
-    func deleteComment(_ commentId: Int) -> Completable {
-        return self.rx.request(.deleteComment(commentId))
-            .asCompletable()
+    func deleteComment(_ commentId: Int) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.deleteComment(commentId))
     }
 
-    func like(_ feedId: String) -> Completable {
-        return self.rx.request(.like(feedId))
-            .asCompletable()
+    func like(_ feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.like(feedId))
     }
 
-    func unLike(_ feedId: String) -> Completable {
-        return self.rx.request(.unLike(feedId))
-            .asCompletable()
+    func unLike(_ feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.unLike(feedId))
     }
 
-    func favorite(_ feedId: String) -> Completable {
-        return self.rx.request(.favorite(feedId))
-            .asCompletable()
+    func favorite(_ feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.favorite(feedId))
     }
 
-    func unFavorite(_ feedId: String) -> Completable {
-        return self.rx.request(.unFavorite(feedId))
-            .asCompletable()
+    func unFavorite(_ feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.unFavorite(feedId))
     }
 }
