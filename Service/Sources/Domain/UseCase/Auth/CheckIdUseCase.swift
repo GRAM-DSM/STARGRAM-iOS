@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class CheckIdUseCase {
 
@@ -10,7 +10,7 @@ public class CheckIdUseCase {
         self.repository = repository
     }
 
-    public func excute(id: String) -> Completable {
-        return repository.checkId(id)
+    public func excute(id: String) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.checkId(id: id)
     }
 }
