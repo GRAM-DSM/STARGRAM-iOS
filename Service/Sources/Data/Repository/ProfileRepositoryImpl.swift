@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 import Moya
 
 class ProfileRepositoryImpl: ProfileRepository {
@@ -8,11 +8,11 @@ class ProfileRepositoryImpl: ProfileRepository {
     private let remoteProfileDataSource = RemoteProfileDataSource.shared
 
     func writeProfile(
-        _ image: Data,
-        _ name: String,
-        _ introduce: String,
-        _ link: String
-    ) -> Completable {
+        image: Data,
+        name: String,
+        introduce: String,
+        link: String
+    ) -> AnyPublisher<Void, STARGRAMError> {
         return remoteProfileDataSource.writeProfile(.init(
             image: image,
             name: name,
@@ -22,11 +22,11 @@ class ProfileRepositoryImpl: ProfileRepository {
     }
 
     func patchProfile(
-        _ image: Data,
-        _ name: String,
-        _ introduce: String,
-        _ link: String
-    ) -> Completable {
+        image: Data,
+        name: String,
+        introduce: String,
+        link: String
+    ) -> AnyPublisher<Void, STARGRAMError> {
         return remoteProfileDataSource.patchProfile(.init(
             image: image,
             name: name,
@@ -35,21 +35,19 @@ class ProfileRepositoryImpl: ProfileRepository {
         ))
     }
 
-    func deleteProfileImage() -> Completable {
+    func deleteProfileImage() -> AnyPublisher<Void, STARGRAMError> {
         return remoteProfileDataSource.deleteProfileImage()
     }
 
-    func fetchProfile() -> Single<Profile> {
+    func fetchProfile() -> AnyPublisher<Profile, STARGRAMError> {
         return remoteProfileDataSource.fetchProfile()
     }
 
-    func fetchWritingFeeds() -> Observable<[Feed]> {
+    func fetchWritingFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
         return remoteProfileDataSource.fetchWritingFeeds()
-            .asObservable()
     }
 
-    func fetchFavoriteFeeds() -> Observable<[Feed]> {
+    func fetchFavoriteFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
         return remoteProfileDataSource.fetchFavoriteFeeds()
-            .asObservable()
     }
 }
