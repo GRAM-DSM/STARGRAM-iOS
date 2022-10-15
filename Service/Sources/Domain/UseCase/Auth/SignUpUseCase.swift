@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class SignUpUseCase {
 
@@ -14,7 +14,7 @@ public class SignUpUseCase {
         id: String,
         password: String,
         email: String
-    ) -> Completable {
-        return repository.signup(id, password, email)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.signup(id: id, password: password, email: email)
     }
 }
