@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class UploadImageUseCase {
 
@@ -10,7 +10,7 @@ public class UploadImageUseCase {
         self.repository = repository
     }
 
-    public func excute(images: [Data]) -> Single<FeedImage> {
-        return repository.uploadImage(images)
+    public func excute(images: [Data]) -> AnyPublisher<FeedImage, STARGRAMError> {
+        return repository.uploadImage(images: images)
     }
 }
