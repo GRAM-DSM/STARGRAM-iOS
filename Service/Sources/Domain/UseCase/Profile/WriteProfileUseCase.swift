@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class WriteProfileUseCase {
 
@@ -15,7 +15,12 @@ public class WriteProfileUseCase {
         name: String,
         introduce: String,
         link: String
-    ) -> Completable {
-        return repository.writeProfile(image, name, introduce, link)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.writeProfile(
+            image: image,
+            name: name,
+            introduce: introduce,
+            link: link
+        )
     }
 }
