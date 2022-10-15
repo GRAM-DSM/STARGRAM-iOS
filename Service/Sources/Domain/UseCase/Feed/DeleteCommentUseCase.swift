@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class DeleteCommentUseCase {
 
@@ -10,7 +10,7 @@ public class DeleteCommentUseCase {
         self.repsoitory = repository
     }
 
-    public func excute(commentId: Int) -> Completable {
-        return repsoitory.deleteComment(commentId)
+    public func excute(commentId: Int) -> AnyPublisher<Void, STARGRAMError> {
+        return repsoitory.deleteComment(commentId: commentId)
     }
 }

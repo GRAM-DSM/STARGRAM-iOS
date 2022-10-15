@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class VerificationEmailUseCase {
 
@@ -10,7 +10,7 @@ public class VerificationEmailUseCase {
         self.repository = repository
     }
 
-    public func excute(email: String) -> Completable {
-        return repository.verificationEmail(email)
+    public func excute(email: String) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.verificationEmail(email: email)
     }
 }

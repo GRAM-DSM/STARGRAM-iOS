@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class PatchCommentUseCase {
 
@@ -14,7 +14,11 @@ public class PatchCommentUseCase {
         commentId: Int,
         feedId: String,
         content: String
-    ) -> Completable {
-        return repository.patchComment(commentId, feedId, content)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.patchComment(
+            commentId: commentId,
+            feedId: feedId,
+            content: content
+        )
     }
 }

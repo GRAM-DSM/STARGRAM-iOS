@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class FetchFeedDetailUseCase {
 
@@ -10,7 +10,7 @@ public class FetchFeedDetailUseCase {
         self.repository = repository
     }
 
-    public func excute(feedId: String) -> Single<FeedDetail> {
-        return repository.fetchFeedDetails(feedId)
+    public func excute(feedId: String) -> AnyPublisher<FeedDetail, STARGRAMError> {
+        return repository.fetchFeedDetails(feedId: feedId)
     }
 }

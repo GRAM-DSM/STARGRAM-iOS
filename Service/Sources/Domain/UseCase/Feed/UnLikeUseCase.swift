@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class UnLikeUseCase {
 
@@ -10,7 +10,7 @@ public class UnLikeUseCase {
         self.repository = repository
     }
 
-    public func excute(feedId: String) -> Completable {
-        return repository.unLike(feedId)
+    public func excute(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.unLike(feedId: feedId)
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 import Moya
 
 class FeedRepositoryImpl: FeedRepository {
@@ -8,11 +8,11 @@ class FeedRepositoryImpl: FeedRepository {
     private let remoteFeedDataSource = RemoteFeedDataSource.shared
 
     func createFeed(
-        _ title: String,
-        _ content: String,
-        _ category: String,
-        _ url: [String]
-    ) -> Completable {
+        title: String,
+        content: String,
+        category: String,
+        url: [String]
+    ) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.createFeed(.init(
             title: title,
             content: content,
@@ -22,9 +22,10 @@ class FeedRepositoryImpl: FeedRepository {
     }
 
     func patchFeed(
-        _ feedId: String,
-        _ title: String,
-        _ content: String) -> Completable {
+        feedId: String,
+        title: String,
+        content: String
+    ) -> AnyPublisher<Void, STARGRAMError> {
             return remoteFeedDataSource.patchFeed(
                 feedId,
                 .init(
@@ -34,31 +35,34 @@ class FeedRepositoryImpl: FeedRepository {
             )
     }
 
-    func deleteFeed(_ feedId: String) -> Completable {
+    func deleteFeed(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.deleteFeed(feedId)
     }
 
-    func uploadImage(_ images: [Data]) -> Single<FeedImage> {
+    func uploadImage(images: [Data]) -> AnyPublisher<FeedImage, STARGRAMError> {
         return remoteFeedDataSource.uploadImage(images)
     }
 
-    func fetchFeeds() -> Observable<[Feed]> {
+    func fetchFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
         return remoteFeedDataSource.fetchFeeds()
-            .asObservable()
     }
 
-    func fetchFeedDetails(_ feedId: String) -> Single<FeedDetail> {
+    func fetchFeedDetails(feedId: String) -> AnyPublisher<FeedDetail, STARGRAMError> {
         return remoteFeedDataSource.fetchFeedDetail(feedId)
     }
 
-    func createComment(_ feedId: String, _ content: String) -> Completable {
+    func createComment(feedId: String, content: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.createComment(.init(
             feedId: feedId,
             content: content
         ))
     }
 
-    func patchComment(_ commentId: Int, _ feedId: String, _ content: String) -> Completable {
+    func patchComment(
+        commentId: Int,
+        feedId: String,
+        content: String
+    ) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.patchComment(
             commentId,
             .init(
@@ -67,23 +71,23 @@ class FeedRepositoryImpl: FeedRepository {
             ))
     }
 
-    func deleteComment(_ commentId: Int) -> Completable {
+    func deleteComment(commentId: Int) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.deleteComment(commentId)
     }
 
-    func like(_ feedId: String) -> Completable {
+    func like(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.like(feedId)
     }
 
-    func unLike(_ feedId: String) -> Completable {
+    func unLike(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.unLike(feedId)
     }
 
-    func favorite(_ feedId: String) -> Completable {
+    func favorite(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.favorite(feedId)
     }
 
-    func unFavorite(_ feedId: String) -> Completable {
+    func unFavorite(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteFeedDataSource.unFavorite(feedId)
     }
 }

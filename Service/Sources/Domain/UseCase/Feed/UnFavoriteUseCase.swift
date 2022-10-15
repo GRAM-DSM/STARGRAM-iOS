@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class UnFavoriteUseCase {
 
@@ -10,7 +10,7 @@ public class UnFavoriteUseCase {
         self.repository = repository
     }
 
-    public func excute(feedId: String) -> Completable {
-        return repository.unFavorite(feedId)
+    public func excute(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.unFavorite(feedId: feedId)
     }
 }

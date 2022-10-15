@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class CreateFeedUseCase {
 
@@ -15,7 +15,12 @@ public class CreateFeedUseCase {
         content: String,
         category: String,
         url: [String]
-    ) -> Completable {
-        return repository.createFeed(title, content, category, url)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.createFeed(
+            title: title,
+            content: content,
+            category: category,
+            url: url
+        )
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class CreateCommentUseCase {
 
@@ -13,7 +13,7 @@ public class CreateCommentUseCase {
     public func excute(
         feedId: String,
         content: String
-    ) -> Completable {
-        return repository.createComment(feedId, content)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.createComment(feedId: feedId, content: content)
     }
 }

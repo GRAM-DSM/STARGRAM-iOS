@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class FetchProfileUseCase {
 
@@ -10,7 +10,7 @@ public class FetchProfileUseCase {
         self.repository = repository
     }
 
-    public func excute() -> Single<Profile> {
+    public func excute() -> AnyPublisher<Profile, STARGRAMError> {
         return repository.fetchProfile()
     }
 }

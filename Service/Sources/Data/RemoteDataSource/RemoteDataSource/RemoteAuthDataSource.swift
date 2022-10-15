@@ -1,8 +1,8 @@
 import Foundation
 
 import Moya
-import RxSwift
-import RxMoya
+import Combine
+import CombineMoya
 
 final class RemoteAuthDataSource: MoyaProvider<AuthAPI> {
 
@@ -10,33 +10,29 @@ final class RemoteAuthDataSource: MoyaProvider<AuthAPI> {
 
     private init() { }
 
-    func signin(_ request: SigninRequest) -> Single<TokenResponse> {
-        return self.rx.request(.signin(request))
-            .map(TokenResponse.self)
+    func signin(_ request: SigninRequest) -> AnyPublisher<TokenResponse, STARGRAMError> {
+        return self.requestPublisher(.signin(request), TokenResponse.self)
     }
 
-    func signup(_ request: SignupRequest) -> Completable {
-        return self.rx.request(.signup(request))
-            .asCompletable()
+    func signup(_ request: SignupRequest) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.signup(request))
     }
 
-    func checkId(_ id: String) -> Completable {
-        return self.rx.request(.checkId(id))
-            .asCompletable()
+    func checkId(_ id: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.checkId(id))
     }
 
-    func refreshToken(_ refreshToken: String) -> Single<TokenResponse> {
-        return self.rx.request(.refreshToken(refreshToken))
-            .map(TokenResponse.self)
+    func refreshToken(_ refreshToken: String) -> AnyPublisher<TokenResponse, STARGRAMError> {
+        return self.requestPublisher(.refreshToken(refreshToken), TokenResponse.self)
     }
 
-    func verificationEmail(_ email: String) -> Completable {
-        return self.rx.request(.verificationEmail(email))
-            .asCompletable()
+    func verificationEmail(_ email: String) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.verificationEmail(email))
     }
 
-    func checkVerficationEmail(_ request: CheckVerificationEmailRequest) -> Completable {
-        return rx.request(.checkVerificationEmail(request))
-            .asCompletable()
+    func checkVerficationEmail(
+        _ request: CheckVerificationEmailRequest
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.checkVerificationEmail(request))
     }
 }

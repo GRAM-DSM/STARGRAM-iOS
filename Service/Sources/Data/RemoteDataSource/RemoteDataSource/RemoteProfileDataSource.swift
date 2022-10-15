@@ -1,8 +1,8 @@
 import Foundation
 
 import Moya
-import RxSwift
-import RxMoya
+import Combine
+import CombineMoya
 
 final class RemoteProfileDataSource: MoyaProvider<ProfileAPI> {
 
@@ -10,36 +10,33 @@ final class RemoteProfileDataSource: MoyaProvider<ProfileAPI> {
 
     private init() { }
 
-    func writeProfile(_ request: ProfileRequest) -> Completable {
-        return self.rx.request(.writeProfile(request))
-            .asCompletable()
+    func writeProfile(_ request: ProfileRequest) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.writeProfile(request))
     }
 
-    func patchProfile(_ request: ProfileRequest) -> Completable {
-        return self.rx.request(.patchProfile(request))
-            .asCompletable()
+    func patchProfile(_ request: ProfileRequest) -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.patchProfile(request))
     }
 
-    func deleteProfileImage() -> Completable {
-        return self.rx.request(.deleteProfileImage)
-            .asCompletable()
+    func deleteProfileImage() -> AnyPublisher<Void, STARGRAMError> {
+        return self.requestVoidPublisher(.deleteProfileImage)
     }
 
-    func fetchProfile() -> Single<Profile> {
-        return self.rx.request(.fetchProfile)
-            .map(ProfileResponse.self)
+    func fetchProfile() -> AnyPublisher<Profile, STARGRAMError> {
+        return self.requestPublisher(.fetchProfile, ProfileResponse.self)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 
-    func fetchWritingFeeds() -> Single<[Feed]> {
-        return self.rx.request(.fetchWritingFeeds)
-            .map(FeedListResponse.self)
+    func fetchWritingFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
+        return self.requestPublisher(.fetchWritingFeeds, FeedListResponse.self)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 
-    func fetchFavoriteFeeds() -> Single<[Feed]> {
-        return self.rx.request(.fetchFavoriteFeeds)
-            .map(FavoriteFeedListResponse.self)
+    func fetchFavoriteFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
+        return self.requestPublisher(.fetchFavoriteFeeds, FavoriteFeedListResponse.self)
             .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 }

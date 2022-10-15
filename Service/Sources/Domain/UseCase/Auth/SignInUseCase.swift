@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class SignInUseCase {
 
@@ -13,7 +13,7 @@ public class SignInUseCase {
     public func excute(
         id: String,
         password: String
-    ) -> Completable {
-        return repository.signin(id, password)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.signin(id: id, password: password)
     }
 }
