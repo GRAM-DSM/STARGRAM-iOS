@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class LikeUseCase {
 
@@ -10,7 +10,7 @@ public class LikeUseCase {
         self.repository = repository
     }
 
-    public func excute(feedId: String) -> Completable {
-        return repository.like(feedId)
+    public func excute(feedId: String) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.like(feedId: feedId)
     }
 }
