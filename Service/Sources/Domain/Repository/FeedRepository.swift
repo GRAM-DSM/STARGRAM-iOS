@@ -1,19 +1,20 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 protocol FeedRepository {
-    func createFeed(_ title: String, _ content: String, _ category: String, _ url: [String]) -> Completable
-    func patchFeed(_ feedId: String, _ title: String, _ content: String) -> Completable
-    func deleteFeed(_ feedId: String) -> Completable
-    func uploadImage(_ images: [Data]) -> Single<FeedImage>
-    func fetchFeeds() -> Observable<[Feed]>
-    func fetchFeedDetails(_ feedId: String) -> Single<FeedDetail>
-    func createComment(_ feedId: String, _ content: String) -> Completable
-    func patchComment(_ commentId: Int, _ feedId: String, _ content: String) -> Completable
-    func deleteComment(_ commentId: Int) -> Completable
-    func like(_ feedId: String) -> Completable
-    func unLike(_ feedId: String) -> Completable
-    func favorite(_ feedId: String) -> Completable
-    func unFavorite(_ feedId: String) -> Completable
+    // swiftlint:disable line_length
+    func createFeed(title: String, content: String, category: String, url: [String]) -> AnyPublisher<Void, STARGRAMError>
+    func patchFeed(feedId: String, title: String, content: String) -> AnyPublisher<Void, STARGRAMError>
+    func deleteFeed(feedId: String) -> AnyPublisher<Void, STARGRAMError>
+    func uploadImage(images: [Data]) -> AnyPublisher<FeedImage, STARGRAMError>
+    func fetchFeeds() -> AnyPublisher<[Feed], STARGRAMError>
+    func fetchFeedDetails(feedId: String) -> AnyPublisher<FeedDetail, STARGRAMError>
+    func createComment(feedId: String, content: String) -> AnyPublisher<Void, STARGRAMError>
+    func patchComment(commentId: Int, feedId: String, content: String) -> AnyPublisher<Void, STARGRAMError>
+    func deleteComment(commentId: Int) -> AnyPublisher<Void, STARGRAMError>
+    func like(feedId: String) -> AnyPublisher<Void, STARGRAMError>
+    func unLike(feedId: String) -> AnyPublisher<Void, STARGRAMError>
+    func favorite(feedId: String) -> AnyPublisher<Void, STARGRAMError>
+    func unFavorite(feedId: String) -> AnyPublisher<Void, STARGRAMError>
 }
