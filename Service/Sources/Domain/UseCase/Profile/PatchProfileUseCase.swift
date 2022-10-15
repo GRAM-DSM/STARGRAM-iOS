@@ -1,6 +1,6 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 public class PatchProfileUseCase {
 
@@ -15,7 +15,12 @@ public class PatchProfileUseCase {
         name: String,
         introduce: String,
         link: String
-    ) -> Completable {
-        return repository.patchProfile(image, name, introduce, link)
+    ) -> AnyPublisher<Void, STARGRAMError> {
+        return repository.patchProfile(
+            image: image,
+            name: name,
+            introduce: introduce,
+            link: link
+        )
     }
 }
