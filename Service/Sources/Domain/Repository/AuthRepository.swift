@@ -1,12 +1,12 @@
 import Foundation
 
-import RxSwift
+import Combine
 
 protocol AuthRepository {
-    func signin(_ id: String, _ password: String) -> Completable
-    func signup(_ id: String, _ password: String, _ email: String) -> Completable
-    func checkId(_ id: String) -> Completable
-    func refreshToken() -> Completable
-    func verificationEmail(_ email: String) -> Completable
-    func checkVerificationEmail(_ email: String, _ code: String) -> Completable
+    func signin(id: String, password: String) -> AnyPublisher<Void, STARGRAMError>
+    func signup(id: String, password: String, email: String) -> AnyPublisher<Void, STARGRAMError>
+    func checkId(id: String) -> AnyPublisher<Void, STARGRAMError>
+    func refreshToken() -> AnyPublisher<Void, STARGRAMError>
+    func verificationEmail(email: String) -> AnyPublisher<Void, STARGRAMError>
+    func checkVerificationEmail(email: String, code: String) -> AnyPublisher<Void, STARGRAMError>
 }
