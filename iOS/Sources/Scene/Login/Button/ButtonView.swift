@@ -2,20 +2,26 @@ import SwiftUI
 
 struct ButtonView: View {
     @Binding var isDisabled: Bool
+    @Binding var isActive: Bool
+    let mainView: MainView
+    let signupView: SignUpView
     var action: () -> Void
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                AuthButton(
-                    isDisabled: $isDisabled,
-                    text: "로그인",
-                    action: action
-                ).padding(.horizontal, 46)
-            }
+            NavigationLink(
+                destination: mainView,
+                isActive: $isActive) {
+                    AuthButton(
+                        isDisabled: $isDisabled,
+                        text: "로그인",
+                        action: action
+                    )
+                }
+                .disabled(isDisabled)
             HStack(alignment: .center) {
                 Text("계정이 없으신가요?")
                 NavigationLink {
-                    SwiftUIView()
+                    signupView
                 } label: {
                     Text("회원가입하기")
                         .font(.button300)
@@ -24,13 +30,5 @@ struct ButtonView: View {
                 }
             }.padding(.top, 14)
         }
-    }
-}
-
-struct MoveSignUpButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ButtonView(
-            isDisabled: .constant(false),
-            action: { })
     }
 }
