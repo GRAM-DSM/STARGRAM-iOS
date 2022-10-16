@@ -1,17 +1,26 @@
 import Foundation
 
+import Service
+
 struct AppDependency {
     let mainView: MainView
 }
 
 extension AppDependency {
     static func resolve() -> AppDependency {
+        // MARK: Dependency
+        let authServiceDependency = AuthServiceDependency.resolve()
         // MARK: ViewModels
         let homeViewModel = HomeViewModel()
         let profileViewModel = ProfileViewModel()
         let editProfileViewModel = EditProfileViewModel()
         let loginViewModel = LoginViewModel()
-        let signUpViewModel = SignUpViewModel()
+        let signUpViewModel = SignUpViewModel(
+            checkIdUseCase: authServiceDependency.checkIdUseCase,
+            verificationEmailUseCase: authServiceDependency.verificationEmailUseCase,
+            checkVerificationEmailUseCase: authServiceDependency.checkVerificationEmailUseCase,
+            signupUseCase: authServiceDependency.signUpUseCase
+        )
         let writeViewModel = WriteViewModel()
         let searchViewModel = SearchViewModel()
 
