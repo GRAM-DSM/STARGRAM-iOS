@@ -6,7 +6,7 @@ struct SignUpView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-                .frame(height: 129)
+                .frame(height: 90)
             SignUpTitle()
                 .padding(.bottom, 15)
             ScrollView {
@@ -66,6 +66,7 @@ struct SignUpView: View {
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
