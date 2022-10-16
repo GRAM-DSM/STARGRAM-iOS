@@ -1,33 +1,48 @@
 import SwiftUI
 
+import Service
+
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
-    @State var entry: Bool = false
+    let mainView: MainView
+    let signupView: SignUpView
 
     var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 150)
-            LoginTitle()
-            Spacer()
-                .frame(minHeight: 0, maxHeight: 120)
-            LoginTextFieldView(
-                id: $viewModel.id,
-                password: $viewModel.password
-            )
-            Spacer()
-                .frame(height: 40)
-            ButtonView(
-                isDisabled: .constant(viewModel.id.isEmpty || viewModel.password.isEmpty),
-                action: { })
-            Spacer()
+        NavigationView {
+            VStack(spacing: 0) {
+                Spacer()
+                    .frame(height: 150)
+                LoginTitle()
+                Spacer()
+                AuthTextField(
+                    placeholder: "아이디",
+                    text: $viewModel.id
+                )
+                .onChange(of: viewModel.id) { _ in
+                    viewModel.isEmptyTextFields()
+                }
+                AuthTextField(
+                    placeholder: "비밀번호",
+                    isSecret: true,
+                    text: $viewModel.password
+                )
+                .onChange(of: viewModel.password) { _ in
+                    viewModel.isEmptyTextFields()
+                }
+                Spacer()
+                    .frame(height: 40)
+                ButtonView(
+                    isDisabled: $viewModel.isDisabled,
+                    isActive: $viewModel.isSuccess,
+                    mainView: mainView,
+                    signupView: signupView
+                ) {
+                    viewModel.login()
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 46)
+            .navigationBarTitleDisplayMode(.inline)
         }
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = LoginViewModel()
-        LoginView(viewModel: viewModel)
     }
 }
