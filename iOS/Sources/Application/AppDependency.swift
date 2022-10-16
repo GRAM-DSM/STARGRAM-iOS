@@ -1,16 +1,22 @@
 import Foundation
 
+import Service
+
 struct AppDependency {
     let mainView: MainView
 }
 
 extension AppDependency {
     static func resolve() -> AppDependency {
+        // MARK: Repotistory
+        let authDependency = AuthServiceDependency.resolve()
         // MARK: ViewModels
         let homeViewModel = HomeViewModel()
         let profileViewModel = ProfileViewModel()
         let editProfileViewModel = EditProfileViewModel()
-        let loginViewModel = LoginViewModel()
+        let loginViewModel = LoginViewModel(
+            signInUseCase: authDependency.signInUseCase
+        )
         let signUpViewModel = SignUpViewModel()
         let writeViewModel = WriteViewModel()
         let searchViewModel = SearchViewModel()
@@ -39,7 +45,8 @@ extension AppDependency {
             profileView: profileView
             )
         _ = LoginView(
-            viewModel: loginViewModel
+            viewModel: loginViewModel,
+            mainView: mainView
         )
         _ = SignUpView(
             viewModel: signUpViewModel
