@@ -49,7 +49,7 @@ struct SignUpView: View {
                         placeholder: "e-mail",
                         text: $viewModel.email,
                         message: $viewModel.emailMessage,
-                        messageColor: .constant(.red),
+                        messageColor: $viewModel.emailMessageColor,
                         buttonTitle: "인증코드 발송",
                         action: {
                             viewModel.verificationEmail()
