@@ -24,7 +24,8 @@ struct LoginView: View {
                 AuthTextField(
                     placeholder: "비밀번호",
                     isSecret: true,
-                    text: $viewModel.password
+                    text: $viewModel.password,
+                    message: $viewModel.errorMessage
                 )
                 .onChange(of: viewModel.password) { _ in
                     viewModel.isEmptyTextFields()
