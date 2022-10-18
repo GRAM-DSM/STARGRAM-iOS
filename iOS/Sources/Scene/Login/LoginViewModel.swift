@@ -6,6 +6,7 @@ import Service
 class LoginViewModel: ObservableObject {
     @Published var id: String = ""
     @Published var password: String = ""
+    @Published var errorMessage: String = ""
     @Published var isSuccess: Bool = false
     @Published var isDisabled: Bool = true
 
@@ -19,11 +20,15 @@ class LoginViewModel: ObservableObject {
 
     func login() {
         signInUseCase.excute(id: id, password: password)
-            .sink { error in
-                print(error.hashValue)
+            .catch { error -> Empty<Void, Never> in
+                print(error)
                 self.isSuccess = false
-            } receiveValue: { _ in
+                self.errorMessage = "아이디 또는 비밀번호가 일치하지 않습니다:("
+                return .init()
+            }
+            .sink {
                 self.isSuccess = true
+                self.errorMessage = ""
             }
             .store(in: &bag)
     }
