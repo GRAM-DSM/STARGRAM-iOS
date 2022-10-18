@@ -10,11 +10,15 @@ extension AppDependency {
     static func resolve() -> AppDependency {
         // MARK: Dependency
         let authServiceDependency = AuthServiceDependency.resolve()
+
         // MARK: ViewModels
         let homeViewModel = HomeViewModel()
         let profileViewModel = ProfileViewModel()
         let editProfileViewModel = EditProfileViewModel()
-        let loginViewModel = LoginViewModel()
+
+        let loginViewModel = LoginViewModel(
+            signInUseCase: authServiceDependency.signInUseCase
+        )
         let signUpViewModel = SignUpViewModel(
             checkIdUseCase: authServiceDependency.checkIdUseCase,
             verificationEmailUseCase: authServiceDependency.verificationEmailUseCase,
@@ -46,12 +50,14 @@ extension AppDependency {
             searchView: searchView,
             writeView: writeView,
             profileView: profileView
-            )
-        _ = LoginView(
-            viewModel: loginViewModel
         )
-        _ = SignUpView(
+        let signupView = SignUpView(
             viewModel: signUpViewModel
+        )
+        _ = LoginView(
+            viewModel: loginViewModel,
+            mainView: mainView,
+            signupView: signupView
         )
 
         return AppDependency(

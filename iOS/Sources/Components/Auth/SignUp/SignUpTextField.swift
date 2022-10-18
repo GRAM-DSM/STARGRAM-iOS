@@ -20,6 +20,7 @@ struct SignUpTextField: View {
                 messageColor: $messageColor
             )
             .padding(.trailing, 6)
+            .textInputAutocapitalization(.never)
             AuthButton(
                 isDisabled: .constant(text.isEmpty),
                 text: buttonTitle,

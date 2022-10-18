@@ -51,6 +51,7 @@ struct AuthTextField: View {
                     }
                 }
                 .frame(height: 51)
+                .textInputAutocapitalization(.never)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(lineWidth: 1)

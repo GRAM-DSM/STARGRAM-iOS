@@ -3,8 +3,6 @@ import SwiftUI
 struct LoginTitle: View {
     var body: some View {
         HStack {
-            Spacer()
-                .frame(width: 46)
             VStack(alignment: .leading, spacing: 3) {
                 Text("안녕하세요")
                     .foregroundColor(Color.orange2)
