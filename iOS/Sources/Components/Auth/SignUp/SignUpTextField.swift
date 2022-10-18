@@ -27,7 +27,7 @@ struct SignUpTextField: View {
                 font: .button400
             ).frame(width: buttonWidth)
                 .padding(.top, 4)
-        }.padding(.horizontal, 46)
+        }
     }
 }
 

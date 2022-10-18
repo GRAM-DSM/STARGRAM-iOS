@@ -25,6 +25,8 @@ extension AuthAPI: StarGramAPI {
             return "/email"
         case .checkVerificationEmail:
             return "/email/check"
+        case .checkId:
+            return "/id/check"
         default:
             return ""
         }

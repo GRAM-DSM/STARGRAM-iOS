@@ -8,16 +8,31 @@ struct AppDependency {
 
 extension AppDependency {
     static func resolve() -> AppDependency {
+<<<<<<< HEAD
         // MARK: Repotistory
         let authDependency = AuthServiceDependency.resolve()
+=======
+        // MARK: Dependency
+        let authServiceDependency = AuthServiceDependency.resolve()
+>>>>>>> origin/develop
         // MARK: ViewModels
         let homeViewModel = HomeViewModel()
         let profileViewModel = ProfileViewModel()
         let editProfileViewModel = EditProfileViewModel()
+<<<<<<< HEAD
         let loginViewModel = LoginViewModel(
             signInUseCase: authDependency.signInUseCase
         )
         let signUpViewModel = SignUpViewModel()
+=======
+        let loginViewModel = LoginViewModel()
+        let signUpViewModel = SignUpViewModel(
+            checkIdUseCase: authServiceDependency.checkIdUseCase,
+            verificationEmailUseCase: authServiceDependency.verificationEmailUseCase,
+            checkVerificationEmailUseCase: authServiceDependency.checkVerificationEmailUseCase,
+            signupUseCase: authServiceDependency.signUpUseCase
+        )
+>>>>>>> origin/develop
         let writeViewModel = WriteViewModel()
         let searchViewModel = SearchViewModel()
 
