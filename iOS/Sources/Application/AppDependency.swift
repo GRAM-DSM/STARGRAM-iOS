@@ -4,6 +4,7 @@ import Service
 
 struct AppDependency {
     let mainView: MainView
+    let signupView: SignUpView
 }
 
 extension AppDependency {
@@ -50,12 +51,13 @@ extension AppDependency {
         _ = LoginView(
             viewModel: loginViewModel
         )
-        _ = SignUpView(
+        let signupView = SignUpView(
             viewModel: signUpViewModel
         )
 
         return AppDependency(
-            mainView: mainView
+            mainView: mainView,
+            signupView: signupView
         )
     }
 }
