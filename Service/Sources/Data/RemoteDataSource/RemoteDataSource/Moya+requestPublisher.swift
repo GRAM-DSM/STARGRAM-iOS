@@ -8,17 +8,17 @@ extension MoyaProvider {
     func requestPublisher<T: Decodable>(
         _ target: Target,
         _ model: T.Type
-    ) -> AnyPublisher<T, STARGRAMError> {
+    ) -> AnyPublisher<T, MoyaError> {
         return self.requestPublisher(target)
+            .filterSuccessfulStatusCodes()
             .map(model.self)
-            .mapError { STARGRAMError($0) }
             .eraseToAnyPublisher()
     }
 
-    func requestVoidPublisher(_ target: Target) -> AnyPublisher<Void, STARGRAMError> {
+    func requestVoidPublisher(_ target: Target) -> AnyPublisher<Void, MoyaError> {
         return self.requestPublisher(target)
+            .filterSuccessfulStatusCodes()
             .map { _ in return }
-            .mapError { STARGRAMError($0) }
             .eraseToAnyPublisher()
     }
 }
