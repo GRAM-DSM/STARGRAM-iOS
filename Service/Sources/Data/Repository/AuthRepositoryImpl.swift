@@ -20,6 +20,7 @@ class AuthRepositoryImpl: AuthRepository {
             self.keychainService.registerAccessToken($0.accessToken)
             self.keychainService.registerRefreshToken($0.refreshToken)
         }
+        .mapError { _ in .badRequest }
         .eraseToAnyPublisher()
     }
 
@@ -33,10 +34,22 @@ class AuthRepositoryImpl: AuthRepository {
             password: password,
             email: email
         ))
+        .mapError { _ in .badRequest }
+        .eraseToAnyPublisher()
     }
 
     func checkId(id: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteAuthDataSource.checkId(id)
+            .mapError { moyaError -> STARGRAMError in
+                switch moyaError.response?.statusCode {
+                case 409:
+                    return STARGRAMError.conflict
+                default:
+                    print(moyaError.response?.statusCode ?? 0)
+                    return .tooManyRequest
+                }
+            }
+            .eraseToAnyPublisher()
     }
 
     func refreshToken() -> AnyPublisher<Void, STARGRAMError> {
@@ -46,11 +59,17 @@ class AuthRepositoryImpl: AuthRepository {
                 self.keychainService.registerAccessToken($0.accessToken)
                 self.keychainService.registerRefreshToken($0.refreshToken)
             }
+            .mapError {
+                print($0.response?.statusCode ?? 0)
+                return .badRequest
+            }
             .eraseToAnyPublisher()
     }
 
     func verificationEmail(email: String) -> AnyPublisher<Void, STARGRAMError> {
         return remoteAuthDataSource.verificationEmail(email)
+            .mapError { _ in .badRequest }
+            .eraseToAnyPublisher()
     }
 
     func checkVerificationEmail(
@@ -61,6 +80,14 @@ class AuthRepositoryImpl: AuthRepository {
             email: email,
             code: code
         ))
+        .mapError { moyaError -> STARGRAMError in
+            switch moyaError.response?.statusCode {
+            case 422:
+                return .emailOutTheStyle
+            default:
+                return .badRequest
+            }
+        }
+        .eraseToAnyPublisher()
     }
-
 }
