@@ -12,7 +12,7 @@ class SignUpViewModel: ObservableObject {
     @Published var authCode: String = ""
 
     // MARK: Boolean
-    @Published var isDisabled: Bool = false
+    @Published var isDisabled: Bool = true
     @Published var isSuccess: Bool = false
     @Published var idIsNotOverlap: Bool = false
     @Published var passwordIsEqual: Bool = false
@@ -27,6 +27,7 @@ class SignUpViewModel: ObservableObject {
 
     // MARK: MessageColor
     @Published var idMessageColor: Color = .red
+    @Published var emailMessageColor: Color = .red
     @Published var authCodeMessageColor: Color = .red
 
     private let checkIdUseCase: CheckIdUseCase
@@ -50,48 +51,66 @@ class SignUpViewModel: ObservableObject {
 
     func checkId() {
         checkIdUseCase.excute(id: id)
-            .sink { error in
-                print(error)
-                self.idMessage = error.hashValue == 409 ? "중복된 아이디입니다:(" : ""
+            .receive(on: DispatchQueue.main)
+            .catch { error -> Empty<Void, Never> in
+                self.idMessage = error == .conflict ? "중복된 아이디입니다:(" : ""
                 self.idMessageColor = .red
                 self.idIsNotOverlap = false
-            } receiveValue: { _ in
+                return .init()
+            }
+            .sink(receiveValue: { _ in
                 self.idMessageColor = .green
                 self.idMessage = "사용할 수 있는 아이디입니다:)"
                 self.idIsNotOverlap = true
-            }
+                self.signupIsDisabled()
+            })
             .store(in: &bag)
+        print("!!!!!")
     }
     func verificationEmail() {
         verificationEmailUseCase.excute(email: email)
-            .sink { error in
+            .receive(on: DispatchQueue.main)
+            .catch { error -> Empty<Void, Never> in
                 print(error)
-                self.emailMessage = "이메일 전송에 실패하였습니다."
-            } receiveValue: { _ in
-                self.emailMessage = ""
+                self.emailMessage = "인증코드 전송에 실패하였습니다."
+                self.emailMessageColor = .red
+                return .init()
+            }
+            .sink { _ in
+                self.emailMessage = "인증코드가 전송되었습니다."
+                self.emailMessageColor = .green
+                self.signupIsDisabled()
             }
             .store(in: &bag)
+        print("!!!!!")
     }
     func checkVerificationEmail() {
         checkVerificationEmailUseCase.excute(email: email, code: authCode)
-            .sink { error in
+            .receive(on: DispatchQueue.main)
+            .catch { error -> Empty<Void, Never> in
                 print(error)
                 self.authCodeMessage = "인증번호가 일치하지 않습니다."
                 self.authCodeMessageColor = .red
                 self.authCodeIsSuccess = false
-            } receiveValue: { _ in
+                return .init()
+            }
+            .sink {
                 self.authCodeMessage = "인증이 완료되었습니다."
                 self.authCodeMessageColor = .green
                 self.authCodeIsSuccess = true
+                self.signupIsDisabled()
             }
             .store(in: &bag)
     }
     func signup() {
         signupUseCase.excute(id: id, password: password, email: email)
-            .sink { error in
+            .receive(on: DispatchQueue.main)
+            .catch { error -> Empty<Void, Never> in
                 print(error)
                 self.isSuccess = false
-            } receiveValue: { _ in
+                return .init()
+            }
+            .sink {
                 self.isSuccess = true
             }
             .store(in: &bag)
@@ -101,7 +120,7 @@ class SignUpViewModel: ObservableObject {
         self.passwordMessage = isPasswordCheck() ? "" : "비밀번호는 8~20자 내로 특수문자 1개 이상 포함하여 입력하세요."
         self.checkPasswordMessage = password == checkPassword ? "" : "비밀번호가 일치하지 않습니다."
     }
-    func signupIsDisabled() {
+    private func signupIsDisabled() {
         self.isDisabled = !passwordIsEqual || !authCodeIsSuccess || !idIsNotOverlap
     }
     private func isPasswordCheck() -> Bool {
