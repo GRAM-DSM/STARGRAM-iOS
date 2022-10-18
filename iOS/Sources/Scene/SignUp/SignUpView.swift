@@ -4,6 +4,7 @@ import Service
 
 struct SignUpView: View {
     @StateObject var viewModel: SignUpViewModel
+    @Environment (\.dismiss) var dismiss
 
     var body: some View {
         VStack(spacing: 0) {
@@ -73,6 +74,9 @@ struct SignUpView: View {
                         text: "회원가입",
                         action: {
                             viewModel.signup()
+                            if viewModel.isSuccess {
+                                dismiss()
+                            }
                         }
                     )
                     .frame(height: 51)
