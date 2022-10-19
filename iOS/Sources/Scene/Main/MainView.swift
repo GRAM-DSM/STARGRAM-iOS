@@ -25,11 +25,6 @@ struct MainView: View {
                     Image("ProfileImage")
                 }
         }
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppDependency.resolve().mainView
+        .navigationBarBackButtonHidden()
     }
 }
