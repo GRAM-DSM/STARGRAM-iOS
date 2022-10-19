@@ -9,7 +9,7 @@ struct SignUpView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-                .frame(height: 90)
+                .frame(height: 70)
             SignUpTitle()
                 .padding(.bottom, 15)
             ScrollView {
@@ -83,6 +83,9 @@ struct SignUpView: View {
                 }
                 .padding(.horizontal, 46)
             }
+        }
+        .onTapGesture {
+            hideKeyboard()
         }
         .navigationBarTitleDisplayMode(.inline)
     }
