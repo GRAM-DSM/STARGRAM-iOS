@@ -3,15 +3,19 @@ import Foundation
 import Service
 
 struct AppDependency {
-    let mainView: MainView
+    let launchScreenView: LaunchScreenView
 }
 
+// swiftlint:disable function_body_length
 extension AppDependency {
     static func resolve() -> AppDependency {
         // MARK: Dependency
         let authServiceDependency = AuthServiceDependency.resolve()
 
         // MARK: ViewModels
+        let launchScreenViewModel = LaunchScreenViewModel(
+            refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
+        )
         let homeViewModel = HomeViewModel()
         let profileViewModel = ProfileViewModel()
         let editProfileViewModel = EditProfileViewModel()
@@ -54,14 +58,18 @@ extension AppDependency {
         let signupView = SignUpView(
             viewModel: signUpViewModel
         )
-        _ = LoginView(
+        let loginView = LoginView(
             viewModel: loginViewModel,
             mainView: mainView,
             signupView: signupView
         )
-
+        let launchScreenView = LaunchScreenView(
+            viewModel: launchScreenViewModel,
+            mainView: mainView,
+            loginView: loginView
+        )
         return AppDependency(
-            mainView: mainView
+            launchScreenView: launchScreenView
         )
     }
 }
