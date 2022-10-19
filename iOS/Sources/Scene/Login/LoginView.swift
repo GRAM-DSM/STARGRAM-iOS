@@ -45,5 +45,8 @@ struct LoginView: View {
             .padding(.horizontal, 46)
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }
