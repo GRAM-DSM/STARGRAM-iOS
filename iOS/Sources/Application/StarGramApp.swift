@@ -4,7 +4,7 @@ import SwiftUI
 struct StarGramApp: App {
     var body: some Scene {
         WindowGroup {
-            AppDependency.resolve().mainView
+            AppDependency.resolve().launchScreenView
         }
     }
 }
