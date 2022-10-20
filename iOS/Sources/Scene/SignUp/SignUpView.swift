@@ -84,9 +84,8 @@ struct SignUpView: View {
                 .padding(.horizontal, 46)
             }
         }
-        .onTapGesture {
-            hideKeyboard()
-        }
+        .hideKeyboard()
+        .setNavigationBackButton()
         .navigationBarTitleDisplayMode(.inline)
     }
 }
