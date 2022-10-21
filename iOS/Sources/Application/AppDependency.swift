@@ -11,13 +11,16 @@ extension AppDependency {
     static func resolve() -> AppDependency {
         // MARK: Dependency
         let authServiceDependency = AuthServiceDependency.resolve()
+        let profileServiceDependency = ProfileServiceDependency.resolve()
 
         // MARK: ViewModels
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
         let homeViewModel = HomeViewModel()
-        let profileViewModel = ProfileViewModel()
+        let profileViewModel = ProfileViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
+        )
         let editProfileViewModel = EditProfileViewModel()
 
         let loginViewModel = LoginViewModel(
