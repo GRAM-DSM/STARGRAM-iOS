@@ -14,7 +14,7 @@ struct EditProfileView: View {
                     .frame(height: 28)
                 Image(uiImage: image)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .background(Color.gray1)
                     .clipShape(Circle())
                     .frame(width: 100, height: 100)
