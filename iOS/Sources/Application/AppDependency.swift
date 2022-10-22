@@ -17,7 +17,9 @@ extension AppDependency {
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
-        let homeViewModel = HomeViewModel()
+        let homeViewModel = HomeViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
+        )
         let profileViewModel = ProfileViewModel(
             fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
         )
@@ -32,12 +34,19 @@ extension AppDependency {
             checkVerificationEmailUseCase: authServiceDependency.checkVerificationEmailUseCase,
             signupUseCase: authServiceDependency.signUpUseCase
         )
+        let postProfileViewModel = PostProfileViewModel(
+            writeProfileUseCase: profileServiceDependency.writeProfileUseCase
+        )
         let writeViewModel = WriteViewModel()
         let searchViewModel = SearchViewModel()
 
         // MARK: View
+        let postProfileView = PostProfileView(
+            viewModel: postProfileViewModel
+        )
         let homeView = HomeView(
-            viewModel: homeViewModel
+            viewModel: homeViewModel,
+            postProfileView: postProfileView
         )
         let searchView = SearchView(
             viewModel: searchViewModel
