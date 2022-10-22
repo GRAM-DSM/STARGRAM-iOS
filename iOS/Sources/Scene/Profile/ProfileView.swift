@@ -35,9 +35,6 @@ struct ProfileView: View {
                 .listStyle(.inset)
                 .padding(.horizontal, 16)
             }
-            .fullScreenCover(isPresented: $viewModel.fetchProfileIsFail, content: {
-                editProfileView
-            })
             .onAppear {
                 viewModel.fetchProfile()
             }
