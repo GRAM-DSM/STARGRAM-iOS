@@ -5,14 +5,13 @@ struct EditProfileView: View {
     @State var showActionSheet: Bool = false
     @State var showImagePicker: Bool = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
-    @State var image = UIImage()
 
     var body: some View {
         NavigationView {
             VStack(spacing: 25) {
                 Spacer()
                     .frame(height: 28)
-                Image(uiImage: image)
+                Image(uiImage: viewModel.image)
                     .resizable()
                     .scaledToFill()
                     .background(Color.gray1)
@@ -59,9 +58,9 @@ struct EditProfileView: View {
                 Spacer()
             }.sheet(isPresented: $showImagePicker) {
                 ImagePicker(
-                    image: self.$image,
-                    sourceType: sourceType
-                )
+                    sourceType: self.sourceType) { image in
+                        viewModel.image = image
+                    }
             }.navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                 Button {
