@@ -6,7 +6,6 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var profile: Profile = .init(name: "", introduce: "", link: "", image: "")
     @Published var feeds: [Feed] = []
-    @Published var fetchProfileIsFail: Bool = false
 
     private let fetchProfileUseCase: FetchProfileUseCase
 
@@ -19,9 +18,7 @@ class ProfileViewModel: ObservableObject {
     func fetchProfile() {
         self.fetchProfileUseCase.excute()
             .catch { error -> Empty<Profile, Never> in
-                if error == .notFound {
-                    self.fetchProfileIsFail = true
-                }
+                print(error)
                 return .init()
             }
             .sink {
