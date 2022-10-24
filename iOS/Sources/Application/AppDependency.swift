@@ -23,7 +23,10 @@ extension AppDependency {
         let profileViewModel = ProfileViewModel(
             fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
         )
-        let editProfileViewModel = EditProfileViewModel()
+        let editProfileViewModel = EditProfileViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase,
+            patchProfileUseCase: profileServiceDependency.patchProfileUseCase
+        )
 
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signInUseCase
