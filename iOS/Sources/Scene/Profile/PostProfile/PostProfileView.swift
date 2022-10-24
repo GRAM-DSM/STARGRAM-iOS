@@ -69,15 +69,17 @@ struct PostProfileView: View {
                 .toolbar {
                 Button {
                     viewModel.postProfile()
-                    if viewModel.isSuccess {
-                        dismiss()
-                    }
                 } label: {
                     Text("완료")
                         .foregroundColor(.orange1)
                         .font(.button300)
                 }
             }
+                .onChange(of: viewModel.isSuccess) {
+                    if $0 {
+                        dismiss()
+                    }
+                }
         }
     }
 }
