@@ -64,10 +64,13 @@ struct WriteView: View {
                 )
                 Spacer()
             }
+            .onChange(of: viewModel.images) { _ in
+                viewModel.setImage()
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button {
-                    print("게시")
+                    viewModel.createFeed()
                 } label: {
                     Text("게시")
                         .foregroundColor(.orange1)
@@ -76,12 +79,5 @@ struct WriteView: View {
                 }
             }
         }
-    }
-}
-
-struct WriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = WriteViewModel()
-        WriteView(viewModel: viewModel)
     }
 }
