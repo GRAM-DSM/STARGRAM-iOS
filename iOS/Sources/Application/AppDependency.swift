@@ -10,13 +10,16 @@ struct AppDependency {
 extension AppDependency {
     static func resolve() -> AppDependency {
         // MARK: Dependency
+        let feedServiceDependency = FeedServiceDependency.resolve()
         let authServiceDependency = AuthServiceDependency.resolve()
 
         // MARK: ViewModels
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
-        let homeViewModel = HomeViewModel()
+        let homeViewModel = HomeViewModel(
+            fetchFeedsUseCase: feedServiceDependency.fetchFeedsUseCase
+        )
         let profileViewModel = ProfileViewModel()
         let editProfileViewModel = EditProfileViewModel()
 
@@ -29,7 +32,10 @@ extension AppDependency {
             checkVerificationEmailUseCase: authServiceDependency.checkVerificationEmailUseCase,
             signupUseCase: authServiceDependency.signUpUseCase
         )
-        let writeViewModel = WriteViewModel()
+        let writeViewModel = WriteViewModel(
+            uploadImageUseCase: feedServiceDependency.uploadImageUseCase,
+            createFeedUseCase: feedServiceDependency.createFeedUseCase
+        )
         let searchViewModel = SearchViewModel()
 
         // MARK: View
