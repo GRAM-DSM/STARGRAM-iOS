@@ -15,12 +15,6 @@ struct HomeView: View {
             .listStyle(.inset)
             .padding(.horizontal, 16)
         }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = HomeViewModel()
-        HomeView(viewModel: viewModel)
+        .onAppear(perform: viewModel.fetchFeeds)
     }
 }
