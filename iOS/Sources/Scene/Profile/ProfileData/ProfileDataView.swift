@@ -12,7 +12,7 @@ struct ProfileDataView: View {
             ) { image in
                     image
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                 } placeholder: {
                     Color.gray2
                 }
