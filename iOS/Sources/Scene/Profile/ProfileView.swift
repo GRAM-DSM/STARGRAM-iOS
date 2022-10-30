@@ -35,9 +35,7 @@ struct ProfileView: View {
                 .listStyle(.inset)
                 .padding(.horizontal, 16)
             }
-            .onAppear {
-                viewModel.fetchProfile()
-            }
+            .onAppear(perform: viewModel.fetchProfile)
             .navigationBarTitleDisplayMode(.inline)
         }
     }
