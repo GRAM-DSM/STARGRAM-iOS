@@ -14,7 +14,7 @@ struct ProfileDataView: View {
                         .resizable()
                         .scaledToFill()
                 } placeholder: {
-                    Color.gray2
+                    Color.gray1
                 }
                 .frame(width: 100, height: 100)
                 .clipShape(Circle())
@@ -35,13 +35,13 @@ struct ProfileDataView: View {
                     Text("프로필 수정")
                         .font(.button500)
                         .foregroundColor(.orange2)
+                        .frame(width: 170, height: 24)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 50)
+                                .stroke(lineWidth: 1)
+                                .foregroundColor(.orange2)
+                        )
                 }
-                .frame(width: 170, height: 24)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 50)
-                        .stroke(lineWidth: 1)
-                        .foregroundColor(.orange2)
-                )
             }
         }
     }
