@@ -21,7 +21,7 @@ class PostProfileViewModel: ObservableObject {
 
     func postProfile() {
         self.writeProfileUseCase.excute(
-            image: image.jpegData(compressionQuality: 1.0)!,
+            image: image.jpegData(compressionQuality: 0.0) ?? Data(),
             name: name,
             introduce: introduce,
             link: link

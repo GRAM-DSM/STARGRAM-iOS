@@ -41,7 +41,7 @@ class EditProfileViewModel: ObservableObject {
     }
     func editProfile() {
         self.patchProfileUseCase.excute(
-            image: image.jpegData(compressionQuality: 1.0) ?? Data(),
+            image: image.jpegData(compressionQuality: 0.0) ?? Data(),
             name: name,
             introduce: introduce,
             link: link
