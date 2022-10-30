@@ -44,12 +44,14 @@ struct EditProfileView: View {
                 title: "이름",
                 placeholder: "이름",
                 text: $viewModel.name
-            ).padding(.horizontal, 46)
+            )
+            .padding(.horizontal, 46)
             AuthTextField(
                 title: "한 줄 소개",
                 placeholder: "한 줄 소개",
                 text: $viewModel.introduce
-            ).padding(.horizontal, 46)
+            )
+            .padding(.horizontal, 46)
             AuthTextField(
                 title: "링크",
                 placeholder: "링크",
@@ -57,8 +59,7 @@ struct EditProfileView: View {
             ).padding(.horizontal, 46)
             Spacer()
         }.sheet(isPresented: $showImagePicker) {
-            ImagePicker(
-                sourceType: self.sourceType) { image in
+            ImagePicker(sourceType: self.sourceType) { image in
                     viewModel.image = image
                 }
         }
