@@ -35,6 +35,7 @@ class EditProfileViewModel: ObservableObject {
                 self.introduce = $0.introduce
                 self.link = $0.link
                 self.image = $0.image.toImage()
+                self.isSuccess = false
             }
             .store(in: &bag)
     }
