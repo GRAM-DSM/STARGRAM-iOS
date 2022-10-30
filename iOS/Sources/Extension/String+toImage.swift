@@ -4,9 +4,14 @@ import UIKit
 
 extension String {
     func toImage() -> UIImage {
-        if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
-            return UIImage(data: data) ?? UIImage()
+        var image = UIImage()
+        let url = URL(string: self)
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                image = UIImage(data: data ?? Data()) ?? UIImage()
+            }
         }
-        return UIImage()
+        return image
     }
 }
