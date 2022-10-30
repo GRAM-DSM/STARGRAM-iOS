@@ -69,9 +69,9 @@ extension FeedAPI: StarGramAPI {
             for image in images {
                 multiformData.append(.init(
                     provider: .data(image),
-                    name: "image",
-                    fileName: "image.jpg",
-                    mimeType: "image/jpg"
+                    name: "images",
+                    fileName: "images.jpg",
+                    mimeType: "images/jpg"
                 ))
             }
             return .uploadMultipart(multiformData)
