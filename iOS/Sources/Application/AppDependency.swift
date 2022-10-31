@@ -11,14 +11,22 @@ extension AppDependency {
     static func resolve() -> AppDependency {
         // MARK: Dependency
         let authServiceDependency = AuthServiceDependency.resolve()
+        let profileServiceDependency = ProfileServiceDependency.resolve()
 
         // MARK: ViewModels
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
-        let homeViewModel = HomeViewModel()
-        let profileViewModel = ProfileViewModel()
-        let editProfileViewModel = EditProfileViewModel()
+        let homeViewModel = HomeViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
+        )
+        let profileViewModel = ProfileViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
+        )
+        let editProfileViewModel = EditProfileViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase,
+            patchProfileUseCase: profileServiceDependency.patchProfileUseCase
+        )
 
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signInUseCase
@@ -29,12 +37,19 @@ extension AppDependency {
             checkVerificationEmailUseCase: authServiceDependency.checkVerificationEmailUseCase,
             signupUseCase: authServiceDependency.signUpUseCase
         )
+        let postProfileViewModel = PostProfileViewModel(
+            writeProfileUseCase: profileServiceDependency.writeProfileUseCase
+        )
         let writeViewModel = WriteViewModel()
         let searchViewModel = SearchViewModel()
 
         // MARK: View
+        let postProfileView = PostProfileView(
+            viewModel: postProfileViewModel
+        )
         let homeView = HomeView(
-            viewModel: homeViewModel
+            viewModel: homeViewModel,
+            postProfileView: postProfileView
         )
         let searchView = SearchView(
             viewModel: searchViewModel

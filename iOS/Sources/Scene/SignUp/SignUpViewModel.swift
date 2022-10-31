@@ -65,7 +65,6 @@ class SignUpViewModel: ObservableObject {
                 self.signupIsDisabled()
             })
             .store(in: &bag)
-        print("!!!!!")
     }
     func verificationEmail() {
         verificationEmailUseCase.excute(email: email)
@@ -82,7 +81,6 @@ class SignUpViewModel: ObservableObject {
                 self.signupIsDisabled()
             }
             .store(in: &bag)
-        print("!!!!!")
     }
     func checkVerificationEmail() {
         checkVerificationEmailUseCase.excute(email: email, code: authCode)

@@ -27,7 +27,8 @@ extension Project {
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
                     scripts: [.swiftLintScript],
-                    dependencies: dependencies
+                    dependencies: dependencies,
+                    settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"])
                 )
             ]
         )

@@ -2,6 +2,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    let postProfileView: PostProfileView
+
     var body: some View {
         VStack(spacing: 3) {
             Spacer()
@@ -15,12 +17,11 @@ struct HomeView: View {
             .listStyle(.inset)
             .padding(.horizontal, 16)
         }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = HomeViewModel()
-        HomeView(viewModel: viewModel)
+        .fullScreenCover(isPresented: $viewModel.isNotProfile) {
+            postProfileView
+        }
+        .onAppear {
+            viewModel.checkUserHaveProfile()
+        }
     }
 }

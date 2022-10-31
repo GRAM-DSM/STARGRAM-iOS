@@ -1,5 +1,6 @@
 import SwiftUI
 
+import Combine
 import Service
 
 struct SignUpView: View {
@@ -29,6 +30,7 @@ struct SignUpView: View {
                     AuthTextField(
                         title: "password",
                         placeholder: "비밀번호",
+                        isSecret: true,
                         text: $viewModel.password,
                         message: $viewModel.passwordMessage
                     )
@@ -74,11 +76,13 @@ struct SignUpView: View {
                         text: "회원가입",
                         action: {
                             viewModel.signup()
-                            if viewModel.isSuccess {
-                                dismiss()
-                            }
                         }
                     )
+                    .onChange(of: viewModel.isSuccess) { newValue in
+                        if newValue {
+                            dismiss()
+                        }
+                    }
                     .frame(height: 51)
                 }
                 .padding(.horizontal, 46)

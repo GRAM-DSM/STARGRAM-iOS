@@ -29,7 +29,8 @@ extension Project {
                         .swiftLintScript,
                         .removeStaticFrameworksScripts
                     ],
-                    dependencies: dependencies
+                    dependencies: dependencies,
+                    settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"])
                 )
             ]
         )
