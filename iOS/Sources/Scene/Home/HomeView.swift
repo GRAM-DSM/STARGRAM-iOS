@@ -2,6 +2,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    let postProfileView: PostProfileView
+
     var body: some View {
         VStack(spacing: 3) {
             Spacer()
@@ -16,5 +18,8 @@ struct HomeView: View {
             .padding(.horizontal, 16)
         }
         .onAppear(perform: viewModel.fetchFeeds)
+        .fullScreenCover(isPresented: $viewModel.isNotProfile) {
+            postProfileView
+        }
     }
 }

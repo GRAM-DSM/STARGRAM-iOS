@@ -6,11 +6,13 @@ struct ButtonView: View {
     let mainView: MainView
     let signupView: SignUpView
     var action: () -> Void
+
     var body: some View {
         VStack(spacing: 0) {
             NavigationLink(
                 destination: mainView,
-                isActive: $isActive) {
+                isActive: $isActive
+            ) {
                     AuthButton(
                         isDisabled: $isDisabled,
                         text: "로그인",

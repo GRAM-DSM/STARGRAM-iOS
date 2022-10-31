@@ -7,6 +7,7 @@ public struct AuthServiceDependency {
     public let signInUseCase: SignInUseCase
     public let signUpUseCase: SignUpUseCase
     public let verificationEmailUseCase: VerificationEmailUseCase
+    public let logoutUseCase: LogoutUseCase
 }
 
 public extension AuthServiceDependency {
@@ -32,6 +33,7 @@ public extension AuthServiceDependency {
         let verificationEmailUseCase = VerificationEmailUseCase(
             repository: repository
         )
+        let logoutUseCase = LogoutUseCase()
 
         return AuthServiceDependency(
             checkIdUseCase: checkIdUseCase,
@@ -39,7 +41,8 @@ public extension AuthServiceDependency {
             refreshTokenUseCase: refreshTokenUseCase,
             signInUseCase: signInUseCase,
             signUpUseCase: signUpUseCase,
-            verificationEmailUseCase: verificationEmailUseCase
+            verificationEmailUseCase: verificationEmailUseCase,
+            logoutUseCase: logoutUseCase
         )
     }
 }

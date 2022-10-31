@@ -12,17 +12,23 @@ extension AppDependency {
         // MARK: Dependency
         let feedServiceDependency = FeedServiceDependency.resolve()
         let authServiceDependency = AuthServiceDependency.resolve()
+        let profileServiceDependency = ProfileServiceDependency.resolve()
 
         // MARK: ViewModels
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
         let homeViewModel = HomeViewModel(
-            fetchFeedsUseCase: feedServiceDependency.fetchFeedsUseCase
+            fetchFeedsUseCase: feedServiceDependency.fetchFeedsUseCase,
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
         )
-        let profileViewModel = ProfileViewModel()
-        let editProfileViewModel = EditProfileViewModel()
-
+        let profileViewModel = ProfileViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
+        )
+        let editProfileViewModel = EditProfileViewModel(
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase,
+            patchProfileUseCase: profileServiceDependency.patchProfileUseCase
+        )
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signInUseCase
         )
@@ -36,11 +42,18 @@ extension AppDependency {
             uploadImageUseCase: feedServiceDependency.uploadImageUseCase,
             createFeedUseCase: feedServiceDependency.createFeedUseCase
         )
+        let postProfileViewModel = PostProfileViewModel(
+            writeProfileUseCase: profileServiceDependency.writeProfileUseCase
+        )
         let searchViewModel = SearchViewModel()
 
         // MARK: View
+        let postProfileView = PostProfileView(
+            viewModel: postProfileViewModel
+        )
         let homeView = HomeView(
-            viewModel: homeViewModel
+            viewModel: homeViewModel,
+            postProfileView: postProfileView
         )
         let searchView = SearchView(
             viewModel: searchViewModel

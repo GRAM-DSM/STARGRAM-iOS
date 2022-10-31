@@ -55,9 +55,7 @@ struct SearchView: View {
                 textColor: .white
             )
         }
-        .onTapGesture {
-            hideKeyboard()
-        }
+        .hideKeyboard()
     }
 }
 

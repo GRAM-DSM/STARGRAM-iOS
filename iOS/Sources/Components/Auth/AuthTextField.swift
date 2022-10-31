@@ -4,7 +4,7 @@ struct AuthTextField: View {
     let title: String
     let placeholder: String
     let isSecret: Bool
-    @State private var isShow: Bool = true
+    @State private var isShow: Bool = false
     @Binding var text: String
     @Binding var message: String
     @Binding var messageColor: Color
@@ -36,14 +36,14 @@ struct AuthTextField: View {
                 HStack {
                     Spacer()
                         .frame(width: 15)
-                    if isShow {
-                        TextField(
+                    if !isShow && isSecret {
+                        SecureField(
                             placeholder,
                             text: $text
                         )
                         .font(.body200)
                     } else {
-                        SecureField(
+                        TextField(
                             placeholder,
                             text: $text
                         )
