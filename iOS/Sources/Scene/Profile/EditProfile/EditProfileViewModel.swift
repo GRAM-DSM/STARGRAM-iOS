@@ -30,11 +30,18 @@ class EditProfileViewModel: ObservableObject {
                 print(error)
                 return .init()
             }
-            .sink {
-                self.name = $0.name
-                self.introduce = $0.introduce
-                self.link = $0.link
-                self.image = $0.image.toImage()
+            .sink { profile in
+                DispatchQueue.global().async {
+                    let url = URL(string: profile.image)
+                    if let data = try? Data(contentsOf: url!) {
+                        DispatchQueue.main.async {
+                            self.image = UIImage(data: data) ?? UIImage()
+                        }
+                    }
+                }
+                self.name = profile.name
+                self.introduce = profile.introduce
+                self.link = profile.link
                 self.isSuccess = false
             }
             .store(in: &bag)
