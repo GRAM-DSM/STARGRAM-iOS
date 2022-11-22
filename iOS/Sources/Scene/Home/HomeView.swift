@@ -17,7 +17,10 @@ struct HomeView: View {
             .listStyle(.inset)
             .padding(.horizontal, 16)
         }
-        .onAppear(perform: viewModel.fetchFeeds)
+        .onAppear {
+            viewModel.fetchFeeds()
+            viewModel.checkUserHaveProfile()
+        }
         .fullScreenCover(isPresented: $viewModel.isNotProfile) {
             postProfileView
         }
