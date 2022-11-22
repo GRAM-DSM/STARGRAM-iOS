@@ -27,6 +27,7 @@ struct PhotoButton: View {
                 .stroke(lineWidth: 1)
                 .foregroundColor(.gray1)
         )
+        .padding(.vertical, 10)
     }
 }
 
