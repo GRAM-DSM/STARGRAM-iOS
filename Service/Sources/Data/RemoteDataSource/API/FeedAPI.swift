@@ -36,8 +36,10 @@ extension FeedAPI: StarGramAPI {
             return "/favorites/\(feedId)"
         case .patchComment(let commentId, _), .deleteComment(let commentId):
             return "/comments/\(commentId)"
-        case .createFeed:
+        case .createComment:
             return "/comments"
+        case .fetchFeeds:
+            return "/list"
         default:
             return ""
         }

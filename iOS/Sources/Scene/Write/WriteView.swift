@@ -5,6 +5,7 @@ import PhotosUI
 struct WriteView: View {
     @StateObject var viewModel: WriteViewModel
     @State var showPhotoPicker: Bool = false
+
     var body: some View {
         NavigationView {
             VStack {
