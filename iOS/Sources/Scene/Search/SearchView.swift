@@ -1,5 +1,7 @@
 import SwiftUI
 
+import Service
+
 struct SearchView: View {
     @StateObject var viewModel: SearchViewModel
 
@@ -19,10 +21,10 @@ struct SearchView: View {
                         .padding(.leading, 33)
                         List(
                             viewModel.searchList,
-                            id: \.self
+                            id: \.feedId
                         ) {
                             SearchListCell(
-                                search: $0,
+                                search: $0.title,
                                 searchText: $viewModel.searchText
                             )
                         }
@@ -61,7 +63,8 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SearchViewModel()
+        let viewModel = SearchViewModel(
+            searchUseCase: SearchServiceDependency.resolve().searchUseCase)
         SearchView(viewModel: viewModel)
     }
 }
