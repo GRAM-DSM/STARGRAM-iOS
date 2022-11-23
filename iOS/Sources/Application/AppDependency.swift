@@ -12,6 +12,7 @@ extension AppDependency {
         // MARK: Dependency
         let authServiceDependency = AuthServiceDependency.resolve()
         let profileServiceDependency = ProfileServiceDependency.resolve()
+        let searchServiceDependency = SearchServiceDependency.resolve()
 
         // MARK: ViewModels
         let launchScreenViewModel = LaunchScreenViewModel(
@@ -41,7 +42,9 @@ extension AppDependency {
             writeProfileUseCase: profileServiceDependency.writeProfileUseCase
         )
         let writeViewModel = WriteViewModel()
-        let searchViewModel = SearchViewModel()
+        let searchViewModel = SearchViewModel(
+            searchUseCase: searchServiceDependency.searchUseCase
+        )
 
         // MARK: View
         let postProfileView = PostProfileView(
