@@ -5,7 +5,7 @@ struct HomeView: View {
     let postProfileView: PostProfileView
 
     var body: some View {
-        VStack(spacing: 3) {
+        VStack(spacing: 0) {
             Spacer()
                 .frame(height: 24)
             HomeTitle()
@@ -13,15 +13,18 @@ struct HomeView: View {
                 .padding(.horizontal, 16)
             List(viewModel.feeds, id: \.id) { feed in
                 HomeListCell(item: feed)
+                    .listRowSeparator(.hidden)
+                    .frame(height: 59)
             }
             .listStyle(.inset)
             .padding(.horizontal, 16)
         }
+        .onAppear {
+            viewModel.fetchFeeds()
+            viewModel.checkUserHaveProfile()
+        }
         .fullScreenCover(isPresented: $viewModel.isNotProfile) {
             postProfileView
-        }
-        .onAppear {
-            viewModel.checkUserHaveProfile()
         }
     }
 }

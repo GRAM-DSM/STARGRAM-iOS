@@ -20,8 +20,6 @@ struct LaunchScreenView: View {
         }
         .background(Color.orange1)
         .ignoresSafeArea()
-        .onAppear {
-            viewModel.autoLogin()
-        }
+        .onAppear(perform: viewModel.autoLogin)
     }
 }

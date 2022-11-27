@@ -76,7 +76,7 @@ class FeedRepositoryImpl: FeedRepository {
     func uploadImage(images: [Data]) -> AnyPublisher<FeedImage, STARGRAMError> {
         return remoteFeedDataSource.uploadImage(images)
             .mapError {
-                print($0.response?.statusCode ?? 0)
+                print($0)
                 return .badRequest
             }
             .eraseToAnyPublisher()
@@ -85,7 +85,7 @@ class FeedRepositoryImpl: FeedRepository {
     func fetchFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
         return remoteFeedDataSource.fetchFeeds()
             .mapError {
-                print($0.response?.statusCode ?? 0)
+                print($0)
                 return .badRequest
             }
             .eraseToAnyPublisher()
