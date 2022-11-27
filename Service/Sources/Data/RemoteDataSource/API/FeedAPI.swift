@@ -36,8 +36,10 @@ extension FeedAPI: StarGramAPI {
             return "/favorites/\(feedId)"
         case .patchComment(let commentId, _), .deleteComment(let commentId):
             return "/comments/\(commentId)"
-        case .createFeed:
+        case .createComment:
             return "/comments"
+        case .fetchFeeds:
+            return "/list"
         default:
             return ""
         }
@@ -69,9 +71,9 @@ extension FeedAPI: StarGramAPI {
             for image in images {
                 multiformData.append(.init(
                     provider: .data(image),
-                    name: "image",
-                    fileName: "image.jpg",
-                    mimeType: "image/jpg"
+                    name: "images",
+                    fileName: "images.jpg",
+                    mimeType: "images/jpg"
                 ))
             }
             return .uploadMultipart(multiformData)

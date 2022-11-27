@@ -7,7 +7,7 @@ public struct Feed: Equatable {
     public let created: Date
     public let heartCount: Int
     public let commentCount: Int
-    public let imageUrl: URL
+    public let imageUrl: String
     public let heartStatus: Bool
 
     public init(
@@ -17,7 +17,7 @@ public struct Feed: Equatable {
         created: Date,
         heartCount: Int,
         commentCount: Int,
-        imageUrl: URL,
+        imageUrl: String,
         heartStatus: Bool
     ) {
         self.id = id

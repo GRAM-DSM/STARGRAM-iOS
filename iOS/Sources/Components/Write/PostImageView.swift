@@ -20,16 +20,6 @@ struct PostImageView: View {
                 }
             }
         }
-        .sheet(
-            isPresented: $showImagePicker,
-            content: {
-                PhotoPicker(
-                    isPresented: $showImagePicker,
-                    images: $images,
-                    selectionLimit: 4,
-                    filter: .images
-                )
-            })
     }
 }
 

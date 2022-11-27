@@ -25,6 +25,9 @@ struct MainView: View {
                     Image("ProfileImage")
                 }
         }
+        .onAppear {
+            UITabBar.appearance().backgroundColor = .white
+        }
         .navigationBarBackButtonHidden()
     }
 }

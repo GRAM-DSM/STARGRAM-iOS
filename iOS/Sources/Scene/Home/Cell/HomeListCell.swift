@@ -5,13 +5,19 @@ import Service
 struct HomeListCell: View {
     var item: Feed
     var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 13)
+        VStack(spacing: 0) {
             HStack {
-                AsyncImage(url: item.imageUrl)
-                    .cornerRadius(8)
-                    .frame(width: 50, height: 50)
+                AsyncImage(
+                    url: URL(string: item.imageUrl)
+                ) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    Color.gray1
+                }
+                .frame(width: 50, height: 50)
+                .cornerRadius(8)
                 VStack(
                     alignment: .leading,
                     spacing: 0
@@ -47,14 +53,9 @@ struct HomeListCell: View {
                         .font(.small200)
                 }
             }
-            Color.gray2
-                .frame(
-                    maxWidth: .infinity,
-                    maxHeight: 1
-                )
-            Spacer()
-                .frame(height: 13)
         }
+        .padding(.vertical, 13)
+        .border(width: 1, edges: [.bottom], color: .gray2)
     }
 }
 
@@ -68,7 +69,7 @@ struct HomeListCell_Previews: PreviewProvider {
                 created: Date(),
                 heartCount: 9,
                 commentCount: 2,
-                imageUrl: URL(string: "https://www.remove.bg/ko")!,
+                imageUrl: "https://www.remove.bg/ko",
                 heartStatus: false
             )
         )

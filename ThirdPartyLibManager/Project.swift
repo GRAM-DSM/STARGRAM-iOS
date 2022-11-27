@@ -6,6 +6,7 @@ let project = Project.dynamicFramework(
     dependencies: [
         .SPM.Moya,
         .SPM.KeychainSwift,
-        .SPM.CombineMoya
+        .SPM.CombineMoya,
+        .SPM.BSImagePicker
     ]
 )
