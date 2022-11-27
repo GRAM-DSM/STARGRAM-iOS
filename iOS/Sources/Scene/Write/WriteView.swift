@@ -91,5 +91,8 @@ struct WriteView: View {
                 .disabled(viewModel.isDisabled)
             }
         }
+        .onAppear {
+            viewModel.removeAll()
+        }
     }
 }
