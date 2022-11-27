@@ -22,6 +22,7 @@ struct HomeView: View {
         .onAppear {
             viewModel.fetchFeeds()
             viewModel.checkUserHaveProfile()
+            UITabBar.appearance().isHidden = false
         }
         .fullScreenCover(isPresented: $viewModel.isNotProfile) {
             postProfileView

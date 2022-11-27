@@ -92,6 +92,9 @@ struct FeedDetailView: View {
                 }
             }
         }
+        .onAppear {
+            UITabBar.appearance().isHidden = true
+        }
     }
 }
 
