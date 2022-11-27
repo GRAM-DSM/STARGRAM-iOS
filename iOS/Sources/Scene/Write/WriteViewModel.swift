@@ -10,6 +10,7 @@ class WriteViewModel: ObservableObject {
     @Published var imageUrl: [String] = []
     @Published var images: [UIImage] = []
     @Published var content: String = ""
+    @Published var isDisabled: Bool = true
     @Published var isSuccess: Bool = false
 
     private let uploadImageUseCase: UploadImageUseCase
@@ -46,18 +47,32 @@ class WriteViewModel: ObservableObject {
     func setImage() {
         if images != [] {
             self.uploadImageUseCase.excute(
-                images: images.map { $0.jpegData(compressionQuality: 1.0) ?? Data() }
+                images: self.images.map { $0.jpegData(compressionQuality: 0.5) ?? Data() }
             )
             .catch { error -> Empty<FeedImage, Never> in
                 print(error)
                 return .init()
             }
             .sink {
+                print($0.urls)
                 self.imageUrl = $0.urls
             }
             .store(in: &bag)
         } else {
             imageUrl = []
         }
+    }
+
+    func checkIsDisabled() {
+        self.isDisabled = title.isEmpty || major.isEmpty || content.isEmpty
+    }
+
+    func removeAll() {
+        title = ""
+        major = ""
+        imageUrl = []
+        images = []
+        content = ""
+        isSuccess = false
     }
 }
