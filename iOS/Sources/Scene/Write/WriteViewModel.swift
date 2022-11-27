@@ -54,7 +54,6 @@ class WriteViewModel: ObservableObject {
                 return .init()
             }
             .sink {
-                print($0.urls)
                 self.imageUrl = $0.urls
             }
             .store(in: &bag)
