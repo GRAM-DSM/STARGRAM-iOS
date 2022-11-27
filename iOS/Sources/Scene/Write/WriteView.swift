@@ -68,16 +68,27 @@ struct WriteView: View {
             .onChange(of: viewModel.images) { _ in
                 viewModel.setImage()
             }
+            .onChange(of: viewModel.content) { _ in
+                viewModel.checkIsDisabled()
+            }
+            .onChange(of: viewModel.major) { _ in
+                viewModel.checkIsDisabled()
+            }
+            .onChange(of: viewModel.isSuccess) {
+                if $0 {
+                    viewModel.removeAll()
+                }
+            }
+            .photoPicker(isPresented: $showPhotoPicker, selection: $viewModel.images)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                Button {
-                    viewModel.createFeed()
-                } label: {
+                Button(action: viewModel.createFeed) {
                     Text("게시")
-                        .foregroundColor(.orange1)
+                        .foregroundColor(viewModel.isDisabled ? .gray1 : .orange1)
                         .font(.body700)
                         .padding()
                 }
+                .disabled(viewModel.isDisabled)
             }
         }
     }
