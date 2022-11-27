@@ -10,7 +10,7 @@ class SearchRepositoryImpl: SearchRepository {
     func search(keyword: String) -> AnyPublisher<[Search], STARGRAMError> {
         return remoteDataSource.search(keyword: keyword)
             .mapError { error -> STARGRAMError in
-                print(error.response?.statusCode ?? 0)
+                print(error)
                 switch error.response?.statusCode {
                 case 400:
                     return .unauthorization
