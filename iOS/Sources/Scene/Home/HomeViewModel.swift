@@ -31,6 +31,7 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &bag)
     }
+
     func checkUserHaveProfile() {
         self.fetchProfileUseCase.excute()
             .catch { error -> Empty<Profile, Never> in
