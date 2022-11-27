@@ -25,6 +25,10 @@ extension StarGramAPI {
         return .requestPlain
     }
 
+    var validationType: ValidationType {
+        return .successCodes
+    }
+
     var headers: [String: String]? {
         switch self {
         default:
@@ -37,6 +41,7 @@ enum ApiDomain: String {
     case auths
     case feeds
     case profiles
+    case searchs
 }
 
 extension ApiDomain {
