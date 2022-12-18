@@ -1,7 +1,5 @@
 import SwiftUI
 
-import Service
-
 struct SearchView: View {
     @StateObject var viewModel: SearchViewModel
 
@@ -9,26 +7,24 @@ struct SearchView: View {
         NavigationView {
             ZStack {
                 if !viewModel.searchList.isEmpty {
-                    VStack(
-                        alignment: .leading,
-                        spacing: 0
-                    ) {
+                    VStack(spacing: 0) {
                         Spacer()
                             .frame(height: 18)
-                        Text("검색어")
-                            .font(.button500)
-                            .foregroundColor(.gray1)
-                            .padding(.leading, 33)
+                        HStack {
+                            Text("검색어")
+                                .font(.button500)
+                                .foregroundColor(.gray1)
+                            Spacer()
+                        }
+                        .padding(.leading, 33)
                         List(
                             viewModel.searchList,
-                            id: \.feedId
+                            id: \.self
                         ) {
                             SearchListCell(
-                                search: $0.title,
+                                search: $0,
                                 searchText: $viewModel.searchText
                             )
-                            .frame(height: 40)
-                            .listRowSeparator(.hidden)
                         }
                         .listStyle(.inset)
                     }
@@ -47,7 +43,9 @@ struct SearchView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     SearchBar(
-                        action: viewModel.fetchSearchList,
+                        action: {
+                            print("search")
+                        },
                         text: $viewModel.searchText
                     )
                 }
@@ -57,17 +55,13 @@ struct SearchView: View {
                 textColor: .white
             )
         }
-        .onChange(of: viewModel.searchText) { _ in
-            viewModel.fetchSearchList()
-        }
         .hideKeyboard()
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SearchViewModel(
-            searchUseCase: SearchServiceDependency.resolve().searchUseCase)
+        let viewModel = SearchViewModel()
         SearchView(viewModel: viewModel)
     }
 }

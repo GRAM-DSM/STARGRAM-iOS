@@ -52,8 +52,7 @@ class AuthRepositoryImpl: AuthRepository {
     }
 
     func refreshToken() -> AnyPublisher<Void, STARGRAMError> {
-        let refreshToken = keychainService.fetchRefreshToken() ?? ""
-        return remoteAuthDataSource.refreshToken(refreshToken)
+        return remoteAuthDataSource.refreshToken()
             .map {
                 self.keychainService.registerAccessToken($0.accessToken)
                 self.keychainService.registerRefreshToken($0.refreshToken)

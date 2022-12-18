@@ -6,7 +6,7 @@ enum AuthAPI {
     case signup(_ request: SignupRequest)
     case signin(_ request: SigninRequest)
     case checkId(_ id: String)
-    case refreshToken(_ refreshToken: String)
+    case refreshToken
     case verificationEmail(_ email: String)
     case checkVerificationEmail(_ request: CheckVerificationEmailRequest)
 }
@@ -69,8 +69,9 @@ extension AuthAPI: StarGramAPI {
     }
 
     var headers: [String: String]? {
+        let refreshToken = KeychainService.shared.fetchRefreshToken()
         switch self {
-        case .refreshToken(let refreshToken):
+        case .refreshToken:
             return ["Authorization": "Bearer \(refreshToken)"]
         default:
             return nil

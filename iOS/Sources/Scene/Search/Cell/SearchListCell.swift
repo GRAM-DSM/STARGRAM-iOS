@@ -5,20 +5,21 @@ struct SearchListCell: View {
     @Binding var searchText: String
     var body: some View {
             ZStack {
-                HStack(spacing: 0) {
+                HStack {
                     Text(search)
                         .font(.body200)
                         .foregroundColor(.gray1)
                     Spacer()
                 }
-                HStack(spacing: 0) {
+                HStack {
                 Text(searchText)
                     .font(.body200)
                     .foregroundColor(.orange1)
                     Spacer()
                 }
             }
-            .padding(.horizontal, 13)
+            .frame(height: 45)
+            .padding(.horizontal, 33)
     }
 }
 
