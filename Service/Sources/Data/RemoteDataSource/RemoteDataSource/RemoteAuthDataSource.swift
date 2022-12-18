@@ -22,8 +22,8 @@ final class RemoteAuthDataSource: MoyaProvider<AuthAPI> {
         return self.requestVoidPublisher(.checkId(id))
     }
 
-    func refreshToken(_ refreshToken: String) -> AnyPublisher<TokenResponse, MoyaError> {
-        return self.requestPublisher(.refreshToken(refreshToken), TokenResponse.self)
+    func refreshToken() -> AnyPublisher<TokenResponse, MoyaError> {
+        return self.requestPublisher(.refreshToken, TokenResponse.self)
     }
 
     func verificationEmail(_ email: String) -> AnyPublisher<Void, MoyaError> {
