@@ -12,6 +12,7 @@ struct WriterView: View {
             AsyncImage(
                 url: URL(string: image)) { image in
                     image
+                        .resizable()
                         .scaledToFill()
                 } placeholder: {
                     Color.gray1
@@ -25,9 +26,9 @@ struct WriterView: View {
                 alignment: .leading,
                 spacing: 0
             ) {
-                Text("토끼")
+                Text(name)
                     .font(.body400)
-                Text("22.07.13 10:17")
+                Text(created.toString(format: "yy.MM.dd hh.mm"))
                     .font(.small200)
                     .foregroundColor(.gray1)
             }
@@ -50,7 +51,7 @@ struct WriterView_Previews: PreviewProvider {
     static var previews: some View {
         WriterView(
             image: "",
-            name: "토끼",
+            name: "",
             created: Date(),
             isPressed: .constant(false)
         )
