@@ -10,7 +10,7 @@ struct FeedDetailTextField: View {
             Button(action: action) {
                 Text("등록")
                     .font(.body600)
-                    .foregroundColor(.gray1)
+                    .foregroundColor(text.isEmpty ? .gray1 : .orange1)
                     .padding()
             }
             .disabled(text.isEmpty)
