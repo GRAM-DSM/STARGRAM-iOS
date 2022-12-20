@@ -30,7 +30,7 @@ struct ProfileView: View {
                     Spacer()
                 }
                 List(viewModel.feeds, id: \.id) { feed in
-                    HomeListCell(item: feed)
+                    HomeListCell(action: { }, item: feed)
                 }
                 .listStyle(.inset)
                 .padding(.horizontal, 16)
