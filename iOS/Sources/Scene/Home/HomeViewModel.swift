@@ -6,6 +6,7 @@ import Service
 class HomeViewModel: ObservableObject {
     @Published var feeds: [Feed] = []
     @Published var isNotProfile: Bool = false
+    @Published var id: String = ""
 
     private let fetchFeedsUseCase: FetchFeedsUseCase
     private let fetchProfileUseCase: FetchProfileUseCase
