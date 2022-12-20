@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FeedDetailView: View {
     @StateObject var viewModel: FeedDetailViewModel
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack(
@@ -9,6 +10,8 @@ struct FeedDetailView: View {
             spacing: 0
         ) {
             ScrollView {
+                Spacer()
+                    .frame(height: 15)
                 HStack(spacing: 1) {
                     Text("Backend")
                         .font(.small100)
@@ -32,7 +35,8 @@ struct FeedDetailView: View {
                     name: viewModel.feedDetail.name,
                     created: Date(),
                     isPressed: .constant(false)
-                ).padding(.bottom, 19)
+                )
+                .padding(.bottom, 19)
                 ZStack(alignment: .bottom) {
                     FeedDetailTabView(images: viewModel.feedDetail.images)
                         .frame(height: 290)
@@ -53,12 +57,8 @@ struct FeedDetailView: View {
                         Text("\(viewModel.feedDetail.heartCount)")
                             .font(.button500)
                             .padding(.trailing, 18)
-                        Button {
-                            viewModel.heartIsClick.toggle()
-                        } label: {
-                            Image(systemName: "bubble.left")
-                                .foregroundColor(.orange1)
-                        }
+                        Image(systemName: "bubble.left")
+                            .foregroundColor(.orange1)
                         Spacer()
                             .frame(width: 7)
                         Text("\(viewModel.feedDetail.commentCount)")
@@ -75,7 +75,8 @@ struct FeedDetailView: View {
                     action: {
                         // action
                     }, text: $viewModel.comment
-                ).ignoresSafeArea(.keyboard)
+                )
+                .ignoresSafeArea(.keyboard)
                 Color.gray2
                     .frame(
                         maxWidth: .infinity,
@@ -92,15 +93,34 @@ struct FeedDetailView: View {
                 }
             }
         }
+        .onChange(of: viewModel.id, perform: { _ in
+            self.viewModel.fetchFeedDetail()
+        })
         .onAppear {
             UITabBar.appearance().isHidden = true
         }
-    }
-}
-
-struct FeedDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = FeedDetailViewModel()
-        FeedDetailView(viewModel: viewModel)
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .resizable()
+                        .foregroundColor(.white)
+                        .frame(width: 10, height: 15)
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .resizable()
+                        .foregroundColor(.white)
+                        .frame(width: 15)
+                }
+            }
+        })
+        .navigationBarColor(.orange1, textColor: .white)
+        .navigationBarBackButtonHidden()
     }
 }
