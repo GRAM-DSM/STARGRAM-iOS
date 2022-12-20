@@ -3,6 +3,7 @@ import SwiftUI
 import Service
 
 struct HomeListCell: View {
+    var action: () -> Void
     var item: Feed
     var body: some View {
         VStack(spacing: 0) {
@@ -27,30 +28,24 @@ struct HomeListCell: View {
                     HStack {
                         Text(item.name)
                             .font(.small100)
-                        Text(item.created.toString())
+                        Text(item.created.toString(format: "yy.MM.dd"))
                             .font(.small100)
                     }
                 }
                 Spacer()
-                VStack {
-                    Button {
-                        print("!")
-                    } label: {
-                        Image(systemName: item.heartStatus ? "heart.fill" : "heart")
-                            .foregroundColor(.orange1)
-                    }
+                Button(action: action) {
+                    Image(systemName: item.heartStatus ? "heart.fill" : "heart")
+                        .foregroundColor(.orange1)
                     Text("\(item.heartCount)")
                         .font(.small200)
                 }
-                VStack {
-                    Button {
-                        print("comment")
-                    } label: {
+                Button { } label: {
+                    VStack {
                         Image(systemName: "bubble.left")
                             .foregroundColor(.orange1)
+                        Text("\(item.commentCount)")
+                            .font(.small200)
                     }
-                    Text("\(item.commentCount)")
-                        .font(.small200)
                 }
             }
         }
@@ -62,6 +57,7 @@ struct HomeListCell: View {
 struct HomeListCell_Previews: PreviewProvider {
     static var previews: some View {
         HomeListCell(
+            action: { },
             item: Feed(
                 id: "",
                 name: "김기영",
