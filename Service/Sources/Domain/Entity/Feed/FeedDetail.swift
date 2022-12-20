@@ -8,9 +8,9 @@ public struct FeedDetail: Equatable {
     public var content: String
     public let created: Date
     public let category: String
-    public let heartCount: Int
+    public var heartCount: Int
     public let commentCount: Int
-    public let favorite: Bool
+    public var favorite: Bool
     public let images: [String]
     public let comments: [Comment]
 

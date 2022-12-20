@@ -11,9 +11,9 @@ extension StarGramAPI {
 
     var baseURL: URL {
         if domain == .feeds {
-            return URL(string: "http://3.38.244.38:8080")!
+            return URL(string: "http://3.36.95.98:8080")!
         } else {
-            return URL(string: "http://3.38.244.38:8000")!
+            return URL(string: "http://3.36.95.98:8000")!
         }
     }
 
@@ -37,6 +37,7 @@ enum ApiDomain: String {
     case auths
     case feeds
     case profiles
+    case searchs
 }
 
 extension ApiDomain {
