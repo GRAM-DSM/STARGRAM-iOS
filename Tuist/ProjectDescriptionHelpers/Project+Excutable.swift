@@ -20,7 +20,7 @@ extension Project {
                     product: product,
                     bundleId: "\(stargramOrganizationName).\(name)",
                     deploymentTarget: .iOS(
-                        targetVersion: "15.0",
+                        targetVersion: "16.0",
                         devices: deploymentDevice
                     ),
                     infoPlist: .file(path: Path("SupportingFiles/Info.plist")),

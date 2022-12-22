@@ -6,5 +6,6 @@ extension TargetDependency {
         public static let KeychainSwift = TargetDependency.external(name: "KeychainSwift")
         public static let CombineMoya = TargetDependency.external(name: "CombineMoya")
         public static let BSImagePicker = TargetDependency.external(name: "BSImagePicker")
+        public static let Introspect = TargetDependency.external(name: "Introspect")
     }
 }
