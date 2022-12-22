@@ -1,9 +1,11 @@
 import SwiftUI
 
+import Introspect
 import Service
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
+    @Environment(\.tabbarHidden) var tabbarHidden
     let postProfileView: PostProfileView
     var feedDetailView: FeedDetailView
 
@@ -32,9 +34,9 @@ struct HomeView: View {
             }
             .onDisappear { feedDetailView.viewModel.id = viewModel.id }
             .onAppear {
+                tabbarHidden.wrappedValue = false
                 viewModel.fetchFeeds()
                 viewModel.checkUserHaveProfile()
-                UITabBar.appearance().isHidden = false
             }
             .fullScreenCover(isPresented: $viewModel.isNotProfile) {
                 postProfileView
