@@ -47,7 +47,11 @@ extension AppDependency {
         )
         let searchViewModel = SearchViewModel()
         let feedDetailVieWModel = FeedDetailViewModel(
-            fetchFeedDetailUseCase: feedServiceDependency.fetchFeedDetailUseCase
+            fetchFeedDetailUseCase: feedServiceDependency.fetchFeedDetailUseCase,
+            likeUseCase: feedServiceDependency.likeUseCase,
+            unLikeUseCase: feedServiceDependency.unLikeUseCase,
+            favoriteUseCase: feedServiceDependency.favoriteUseCase,
+            unFavoriteUseCase: feedServiceDependency.unFavoriteUseCase
         )
 
         // MARK: View
