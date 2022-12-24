@@ -33,7 +33,7 @@ extension FeedAPI: StarGramAPI {
         case .like(let feedId), .unLike(let feedId):
             return "/likes/\(feedId)"
         case .favorite(let feedId), .unFavorite(let feedId):
-            return "/favorites/\(feedId)"
+            return "/bookmark/\(feedId)"
         case .patchComment(let commentId, _), .deleteComment(let commentId):
             return "/comments/\(commentId)"
         case .createComment:

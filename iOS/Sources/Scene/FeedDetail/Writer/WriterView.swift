@@ -4,6 +4,7 @@ struct WriterView: View {
     var image: String
     var name: String
     var created: Date
+    var action: () -> Void
     @Binding var isPressed: Bool
     var body: some View {
         HStack(spacing: 0) {
@@ -12,6 +13,7 @@ struct WriterView: View {
             AsyncImage(
                 url: URL(string: image)) { image in
                     image
+                        .resizable()
                         .scaledToFill()
                 } placeholder: {
                     Color.gray1
@@ -25,16 +27,14 @@ struct WriterView: View {
                 alignment: .leading,
                 spacing: 0
             ) {
-                Text("토끼")
+                Text(name)
                     .font(.body400)
-                Text("22.07.13 10:17")
+                Text(created.toString(format: "yy.MM.dd hh.mm"))
                     .font(.small200)
                     .foregroundColor(.gray1)
             }
             Spacer()
-            Button {
-                isPressed.toggle()
-            } label: {
+            Button(action: action) {
                 Image(systemName: isPressed ? "star.fill" : "star")
                     .resizable()
                     .frame(width: 27.6, height: 26.25)
@@ -50,8 +50,9 @@ struct WriterView_Previews: PreviewProvider {
     static var previews: some View {
         WriterView(
             image: "",
-            name: "토끼",
+            name: "",
             created: Date(),
+            action: { },
             isPressed: .constant(false)
         )
     }

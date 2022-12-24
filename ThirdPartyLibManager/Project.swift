@@ -7,6 +7,7 @@ let project = Project.dynamicFramework(
         .SPM.Moya,
         .SPM.KeychainSwift,
         .SPM.CombineMoya,
-        .SPM.BSImagePicker
+        .SPM.BSImagePicker,
+        .SPM.Introspect
     ]
 )

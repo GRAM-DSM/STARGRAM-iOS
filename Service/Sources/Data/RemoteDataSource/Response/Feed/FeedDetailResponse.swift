@@ -10,6 +10,7 @@ struct FeedDetailRepsponse: Decodable {
         case created = "create_at"
         case category
         case heartCount = "heart_count"
+        case heartState = "heart_type"
         case commentCount = "comment_count"
         case favorite
         case images
@@ -23,6 +24,7 @@ struct FeedDetailRepsponse: Decodable {
     let created: String
     let category: String
     let heartCount: Int
+    let heartState: Bool
     let commentCount: Int
     let favorite: Bool
     let images: [String]
@@ -40,6 +42,7 @@ extension FeedDetailRepsponse {
             created: created.toDate(),
             category: category,
             heartCount: heartCount,
+            heartState: heartState,
             commentCount: commentCount,
             favorite: favorite,
             images: images,

@@ -30,7 +30,7 @@ struct CommentListCell: View {
                         .font(.body700)
                     Text(comment.content)
                         .font(.small100)
-                    Text(comment.created.toString())
+                    Text(comment.created.toString(format: "yy.MM.dd hh:mm"))
                         .font(.small200)
                         .foregroundColor(.gray1)
                 }

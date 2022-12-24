@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
+    @Environment(\.tabbarHidden) var tabbarHidden
     var editProfileView: EditProfileView
 
     var body: some View {
@@ -30,12 +31,15 @@ struct ProfileView: View {
                     Spacer()
                 }
                 List(viewModel.feeds, id: \.id) { feed in
-                    HomeListCell(item: feed)
+                    HomeListCell(action: { }, item: feed)
                 }
                 .listStyle(.inset)
                 .padding(.horizontal, 16)
             }
-            .onAppear(perform: viewModel.fetchProfile)
+            .onAppear {
+                viewModel.fetchProfile()
+                tabbarHidden.wrappedValue = false
+            }
             .navigationBarTitleDisplayMode(.inline)
         }
     }

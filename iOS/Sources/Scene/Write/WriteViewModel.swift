@@ -63,7 +63,7 @@ class WriteViewModel: ObservableObject {
     }
 
     func checkIsDisabled() {
-        self.isDisabled = title.isEmpty || major.isEmpty || content.isEmpty
+        self.isDisabled = title.isEmpty || major.isEmpty || content.isEmpty || imageUrl == []
     }
 
     func removeAll() {

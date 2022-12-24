@@ -8,9 +8,10 @@ public struct FeedDetail: Equatable {
     public var content: String
     public let created: Date
     public let category: String
-    public let heartCount: Int
+    public var heartCount: Int
+    public var heartState: Bool
     public let commentCount: Int
-    public let favorite: Bool
+    public var favorite: Bool
     public let images: [String]
     public let comments: [Comment]
 
@@ -23,6 +24,7 @@ public struct FeedDetail: Equatable {
         created: Date,
         category: String,
         heartCount: Int,
+        heartState: Bool,
         commentCount: Int,
         favorite: Bool,
         images: [String],
@@ -36,6 +38,7 @@ public struct FeedDetail: Equatable {
         self.created = created
         self.category = category
         self.heartCount = heartCount
+        self.heartState = heartState
         self.commentCount = commentCount
         self.favorite = favorite
         self.images = images

@@ -10,5 +10,8 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "20.0.0")),
         // BSImagePicker
         .remote(url: "https://github.com/mikaoj/BSImagePicker.git",
-                requirement: .upToNextMajor(from: "3.3.1"))
+                requirement: .upToNextMajor(from: "3.3.1")),
+        // Introspect
+        .remote(url: "https://github.com/siteline/SwiftUI-Introspect.git",
+                requirement: .branch("master"))
     ]))

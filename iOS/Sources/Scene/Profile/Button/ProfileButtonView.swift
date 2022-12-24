@@ -20,8 +20,8 @@ struct ProfileButtonView: View {
                 ProfileButton(
                     action: {
                         action1
-                        isClick1.toggle()
-                        isClick2.toggle()
+                        isClick1 = true
+                        isClick2 = false
                     },
                     title: "작성글",
                     isClick: $isClick1
@@ -29,8 +29,8 @@ struct ProfileButtonView: View {
                 ProfileButton(
                     action: {
                         action2
-                        isClick1.toggle()
-                        isClick2.toggle()
+                        isClick1 = false
+                        isClick2 = true
                     },
                     title: "즐겨찾기",
                     isClick: $isClick2

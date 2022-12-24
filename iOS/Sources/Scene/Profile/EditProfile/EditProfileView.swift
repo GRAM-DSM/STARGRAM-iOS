@@ -3,6 +3,7 @@ import SwiftUI
 struct EditProfileView: View {
     @StateObject var viewModel: EditProfileViewModel
     @Environment(\.dismiss) var dismiss
+    @Environment(\.tabbarHidden) var tabbarHidden
     @State var showActionSheet: Bool = false
     @State var showImagePicker: Bool = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
@@ -79,6 +80,9 @@ struct EditProfileView: View {
                     dismiss()
                 }
             }
-            .onAppear(perform: viewModel.fetchProfile)
+            .onAppear {
+                viewModel.fetchProfile()
+                tabbarHidden.wrappedValue = true
+            }
     }
 }

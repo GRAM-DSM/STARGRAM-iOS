@@ -46,14 +46,25 @@ extension AppDependency {
             writeProfileUseCase: profileServiceDependency.writeProfileUseCase
         )
         let searchViewModel = SearchViewModel()
+        let feedDetailVieWModel = FeedDetailViewModel(
+            fetchFeedDetailUseCase: feedServiceDependency.fetchFeedDetailUseCase,
+            likeUseCase: feedServiceDependency.likeUseCase,
+            unLikeUseCase: feedServiceDependency.unLikeUseCase,
+            favoriteUseCase: feedServiceDependency.favoriteUseCase,
+            unFavoriteUseCase: feedServiceDependency.unFavoriteUseCase
+        )
 
         // MARK: View
+        let feedDetailView = FeedDetailView(
+            viewModel: feedDetailVieWModel
+        )
         let postProfileView = PostProfileView(
             viewModel: postProfileViewModel
         )
         let homeView = HomeView(
             viewModel: homeViewModel,
-            postProfileView: postProfileView
+            postProfileView: postProfileView,
+            feedDetailView: feedDetailView
         )
         let searchView = SearchView(
             viewModel: searchViewModel

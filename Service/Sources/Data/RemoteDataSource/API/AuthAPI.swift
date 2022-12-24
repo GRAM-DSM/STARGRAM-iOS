@@ -69,7 +69,7 @@ extension AuthAPI: StarGramAPI {
     }
 
     var headers: [String: String]? {
-        let refreshToken = KeychainService.shared.fetchRefreshToken()
+        let refreshToken = KeychainService.shared.fetchRefreshToken() ?? ""
         switch self {
         case .refreshToken:
             return ["Authorization": "Bearer \(refreshToken)"]
