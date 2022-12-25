@@ -4,6 +4,7 @@ struct FeedDetailView: View {
     @StateObject var viewModel: FeedDetailViewModel
     @Environment(\.dismiss) var dismiss
     @Environment(\.tabbarHidden) var tabbarHidden
+    @State var id: String = ""
 
     var body: some View {
             VStack(
