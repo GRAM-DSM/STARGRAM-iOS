@@ -13,6 +13,7 @@ extension AppDependency {
         let feedServiceDependency = FeedServiceDependency.resolve()
         let authServiceDependency = AuthServiceDependency.resolve()
         let profileServiceDependency = ProfileServiceDependency.resolve()
+        let searchServiceDependency = SearchServiceDependency.resolve()
 
         // MARK: ViewModels
         let launchScreenViewModel = LaunchScreenViewModel(
@@ -45,7 +46,9 @@ extension AppDependency {
         let postProfileViewModel = PostProfileViewModel(
             writeProfileUseCase: profileServiceDependency.writeProfileUseCase
         )
-        let searchViewModel = SearchViewModel()
+        let searchViewModel = SearchViewModel(
+            searchUseCase: searchServiceDependency.searchUseCase
+        )
         let feedDetailVieWModel = FeedDetailViewModel(
             fetchFeedDetailUseCase: feedServiceDependency.fetchFeedDetailUseCase,
             likeUseCase: feedServiceDependency.likeUseCase,
@@ -67,7 +70,8 @@ extension AppDependency {
             feedDetailView: feedDetailView
         )
         let searchView = SearchView(
-            viewModel: searchViewModel
+            viewModel: searchViewModel,
+            feedDetailView: feedDetailView
         )
         let writeView = WriteView(
             viewModel: writeViewModel
