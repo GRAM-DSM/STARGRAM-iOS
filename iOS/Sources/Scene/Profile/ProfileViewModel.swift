@@ -8,9 +8,17 @@ class ProfileViewModel: ObservableObject {
     @Published var feeds: [Feed] = []
 
     private let fetchProfileUseCase: FetchProfileUseCase
+    private let fetchBookmarkFeedsUseCase: FetchFavoriteFeedsUseCase
+    private let fetchWritingFeedsUseCase: FetchWritingFeedsUseCase
 
-    init(fetchProfileUseCase: FetchProfileUseCase) {
+    init(
+        fetchProfileUseCase: FetchProfileUseCase,
+        fetchBookmarkFeedsUseCase: FetchFavoriteFeedsUseCase,
+        fetchLikeFeedsUseCase: FetchWritingFeedsUseCase
+    ) {
         self.fetchProfileUseCase = fetchProfileUseCase
+        self.fetchBookmarkFeedsUseCase = fetchBookmarkFeedsUseCase
+        self.fetchWritingFeedsUseCase = fetchLikeFeedsUseCase
     }
 
     private var bag = Set<AnyCancellable>()
@@ -23,6 +31,30 @@ class ProfileViewModel: ObservableObject {
             }
             .sink {
                 self.profile = $0
+            }
+            .store(in: &bag)
+    }
+
+    func fetchBookmarkFeeds() {
+        self.fetchBookmarkFeedsUseCase.excute()
+            .catch { error -> Empty<[Feed], Never> in
+                print(error)
+                return .init()
+            }
+            .sink {
+                self.feeds = $0
+            }
+            .store(in: &bag)
+    }
+
+    func fetchWritingFeeds() {
+        self.fetchWritingFeedsUseCase.excute()
+            .catch { error -> Empty<[Feed], Never> in
+                print(error)
+                return .init()
+            }
+            .sink {
+                self.feeds = $0
             }
             .store(in: &bag)
     }
