@@ -3,6 +3,8 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
     @Environment(\.tabbarHidden) var tabbarHidden
+    @State var writingButtonIsClick: Bool = true
+    @State var bookmarkButtonIsClick: Bool = false
     var editProfileView: EditProfileView
 
     var body: some View {
@@ -17,8 +19,18 @@ struct ProfileView: View {
                 Spacer()
                     .frame(height: 31)
                 ProfileButtonView(
-                    action1: print(""),
-                    action2: print("")
+                    action1: {
+                        viewModel.fetchWritingFeeds()
+                        writingButtonIsClick = true
+                        bookmarkButtonIsClick = false
+                    },
+                    action2: {
+                        viewModel.fetchBookmarkFeeds()
+                        writingButtonIsClick = false
+                        bookmarkButtonIsClick = true
+                    },
+                    isClick1: $writingButtonIsClick,
+                    isClick2: $bookmarkButtonIsClick
                 )
                 Spacer()
                     .frame(height: 15)
@@ -38,6 +50,7 @@ struct ProfileView: View {
             }
             .onAppear {
                 viewModel.fetchProfile()
+                viewModel.fetchWritingFeeds()
                 tabbarHidden.wrappedValue = false
             }
             .navigationBarTitleDisplayMode(.inline)

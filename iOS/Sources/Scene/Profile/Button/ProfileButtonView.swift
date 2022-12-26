@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ProfileButtonView: View {
-    var action1: Void
-    var action2: Void
-    @State var isClick1: Bool = true
-    @State var isClick2: Bool = false
+    var action1: () -> Void
+    var action2: () -> Void
+    @Binding var isClick1: Bool
+    @Binding var isClick2: Bool
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -18,33 +18,16 @@ struct ProfileButtonView: View {
                 spacing: 80
             ) {
                 ProfileButton(
-                    action: {
-                        action1
-                        isClick1 = true
-                        isClick2 = false
-                    },
+                    action: action1,
                     title: "작성글",
                     isClick: $isClick1
                 )
                 ProfileButton(
-                    action: {
-                        action2
-                        isClick1 = false
-                        isClick2 = true
-                    },
+                    action: action2,
                     title: "즐겨찾기",
                     isClick: $isClick2
                 )
             }
         }
-    }
-}
-
-struct ProfileButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileButtonView(
-            action1: print(""),
-            action2: print("")
-        )
     }
 }
