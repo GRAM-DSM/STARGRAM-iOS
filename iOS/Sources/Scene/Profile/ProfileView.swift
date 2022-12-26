@@ -5,11 +5,12 @@ struct ProfileView: View {
     @Environment(\.tabbarHidden) var tabbarHidden
     @State var writingButtonIsClick: Bool = true
     @State var bookmarkButtonIsClick: Bool = false
-    var editProfileView: EditProfileView
+    let editProfileView: EditProfileView
+    let feedDetailView: FeedDetailView
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 Spacer()
                     .frame(height: 37)
                 ProfileDataView(
@@ -43,11 +44,21 @@ struct ProfileView: View {
                     Spacer()
                 }
                 List(viewModel.feeds, id: \.id) { feed in
-                    HomeListCell(action: { }, item: feed)
+                    ZStack {
+                        NavigationLink(destination: feedDetailView) {
+                            EmptyView()
+                        }
+                        .opacity(0)
+                        .buttonStyle(.plain)
+                        HomeListCell(action: { viewModel.id = feed.id }, item: feed)
+                            .frame(height: 57)
+                    }
+                    .listRowSeparator(.hidden)
                 }
                 .listStyle(.inset)
                 .padding(.horizontal, 16)
             }
+            .onDisappear { feedDetailView.viewModel.id = viewModel.id }
             .onAppear {
                 viewModel.fetchProfile()
                 viewModel.fetchWritingFeeds()

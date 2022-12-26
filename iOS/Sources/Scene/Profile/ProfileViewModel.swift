@@ -6,6 +6,7 @@ import Combine
 class ProfileViewModel: ObservableObject {
     @Published var profile: Profile = .init(name: "", introduce: "", link: "", image: "")
     @Published var feeds: [Feed] = []
+    @Published var id: String = ""
 
     private let fetchProfileUseCase: FetchProfileUseCase
     private let fetchBookmarkFeedsUseCase: FetchFavoriteFeedsUseCase
