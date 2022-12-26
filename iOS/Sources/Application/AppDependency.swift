@@ -83,7 +83,8 @@ extension AppDependency {
         )
         let profileView = ProfileView(
             viewModel: profileViewModel,
-            editProfileView: editProfileView
+            editProfileView: editProfileView,
+            feedDetailView: feedDetailView
         )
         let mainView = MainView(
             homeView: homeView,
