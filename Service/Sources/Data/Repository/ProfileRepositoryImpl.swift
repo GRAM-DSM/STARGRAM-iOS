@@ -66,6 +66,7 @@ class ProfileRepositoryImpl: ProfileRepository {
     func fetchWritingFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
         return remoteProfileDataSource.fetchWritingFeeds()
             .mapError {
+                print($0)
                 print($0.response?.statusCode ?? 0)
                 return .notFound
             }
@@ -75,6 +76,7 @@ class ProfileRepositoryImpl: ProfileRepository {
     func fetchFavoriteFeeds() -> AnyPublisher<[Feed], STARGRAMError> {
         return remoteProfileDataSource.fetchFavoriteFeeds()
             .mapError {
+                print($0)
                 print($0.response?.statusCode ?? 0)
                 return .notFound
             }
