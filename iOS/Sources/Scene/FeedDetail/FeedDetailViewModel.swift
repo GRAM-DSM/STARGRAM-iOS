@@ -28,19 +28,22 @@ class FeedDetailViewModel: ObservableObject {
     private let unLikeUseCase: UnLikeUseCase
     private let favoriteUseCase: FavoriteUseCase
     private let unFavoriteUseCase: UnFavoriteUseCase
+    private let createCommentUseCase: CreateCommentUseCase
 
     init(
         fetchFeedDetailUseCase: FetchFeedDetailUseCase,
         likeUseCase: LikeUseCase,
         unLikeUseCase: UnLikeUseCase,
         favoriteUseCase: FavoriteUseCase,
-        unFavoriteUseCase: UnFavoriteUseCase
+        unFavoriteUseCase: UnFavoriteUseCase,
+        createCommentUseCase: CreateCommentUseCase
     ) {
         self.fetchFeedDetailUseCase = fetchFeedDetailUseCase
         self.likeUseCase = likeUseCase
         self.unLikeUseCase = unLikeUseCase
         self.favoriteUseCase = favoriteUseCase
         self.unFavoriteUseCase = unFavoriteUseCase
+        self.createCommentUseCase = createCommentUseCase
     }
 
     private var bag = Set<AnyCancellable>()
@@ -52,6 +55,7 @@ class FeedDetailViewModel: ObservableObject {
                 return .init()
             }
             .sink { [weak self] feedDetail in
+                print(feedDetail.comments)
                 self?.feedDetail = feedDetail
                 self?.heartCount = 0
             }
@@ -106,5 +110,18 @@ class FeedDetailViewModel: ObservableObject {
                 }
                 .store(in: &bag)
         }
+    }
+
+    func writeComment() {
+        self.createCommentUseCase.excute(feedId: id, content: comment)
+            .catch { error -> Empty<Void, Never> in
+                print(error)
+                return .init()
+            }
+            .sink { _ in
+                self.fetchFeedDetail()
+                self.comment = ""
+            }
+            .store(in: &bag)
     }
 }
