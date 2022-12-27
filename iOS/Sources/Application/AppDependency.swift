@@ -56,7 +56,8 @@ extension AppDependency {
             likeUseCase: feedServiceDependency.likeUseCase,
             unLikeUseCase: feedServiceDependency.unLikeUseCase,
             favoriteUseCase: feedServiceDependency.favoriteUseCase,
-            unFavoriteUseCase: feedServiceDependency.unFavoriteUseCase
+            unFavoriteUseCase: feedServiceDependency.unFavoriteUseCase,
+            createCommentUseCase: feedServiceDependency.createCommentUseCase
         )
 
         // MARK: View
