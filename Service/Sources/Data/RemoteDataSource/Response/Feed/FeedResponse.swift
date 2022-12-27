@@ -17,7 +17,7 @@ struct FeedResponse: Decodable {
     let created: String
     let heartCount: Int
     let commentCount: Int
-    let imageUrlString: [String]
+    let imageUrlString: [String?]
     let heartStatus: Bool
 }
 
@@ -30,7 +30,7 @@ extension FeedResponse {
             created: created.toDate(),
             heartCount: heartCount,
             commentCount: commentCount,
-            imageUrl: imageUrlString != [] ? imageUrlString[0] : "",
+            imageUrl: imageUrlString != [] ? imageUrlString[0] ?? "" : "",
             heartStatus: heartStatus
         )
     }

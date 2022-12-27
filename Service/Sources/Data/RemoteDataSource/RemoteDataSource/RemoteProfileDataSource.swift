@@ -35,7 +35,7 @@ final class RemoteProfileDataSource: MoyaProvider<ProfileAPI> {
     }
 
     func fetchFavoriteFeeds() -> AnyPublisher<[Feed], MoyaError> {
-        return self.requestPublisher(.fetchFavoriteFeeds, FavoriteFeedListResponse.self)
+        return self.requestPublisher(.fetchFavoriteFeeds, FeedListResponse.self)
             .map { $0.toDomain() }
             .eraseToAnyPublisher()
     }

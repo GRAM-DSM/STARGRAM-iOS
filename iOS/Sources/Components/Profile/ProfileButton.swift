@@ -16,8 +16,10 @@ struct ProfileButton: View {
                         .frame(width: 100, height: 4)
                         .cornerRadius(2)
                 }
-            }.frame(width: 100)
+            }
+            .frame(width: 100)
         }
+        .disabled(isClick)
     }
 }
 

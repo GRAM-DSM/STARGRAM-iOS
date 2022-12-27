@@ -24,7 +24,9 @@ extension AppDependency {
             fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
         )
         let profileViewModel = ProfileViewModel(
-            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase
+            fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase,
+            fetchBookmarkFeedsUseCase: profileServiceDependency.fetchFavoriteFeedsUseCase,
+            fetchLikeFeedsUseCase: profileServiceDependency.fetchWritingFeedsUseCase
         )
         let editProfileViewModel = EditProfileViewModel(
             fetchProfileUseCase: profileServiceDependency.fetchProfileUseCase,
@@ -81,7 +83,8 @@ extension AppDependency {
         )
         let profileView = ProfileView(
             viewModel: profileViewModel,
-            editProfileView: editProfileView
+            editProfileView: editProfileView,
+            feedDetailView: feedDetailView
         )
         let mainView = MainView(
             homeView: homeView,
