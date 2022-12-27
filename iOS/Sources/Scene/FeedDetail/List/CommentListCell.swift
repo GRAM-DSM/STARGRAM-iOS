@@ -40,18 +40,7 @@ struct CommentListCell: View {
                     maxWidth: .infinity,
                     maxHeight: 1
                 )
+                .padding(.top, 5)
         }.padding(.horizontal, 16)
-    }
-}
-
-struct CommentListCell_Previews: PreviewProvider {
-    static var previews: some View {
-        CommentListCell(comment: .init(
-            commentId: 1,
-            profileImageUrl: "",
-            name: "김기영",
-            content: "안녕하세요.",
-            created: Date()
-        ))
     }
 }

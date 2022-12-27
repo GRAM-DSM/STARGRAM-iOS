@@ -106,15 +106,12 @@ class FeedRepositoryImpl: FeedRepository {
     }
 
     func createComment(feedId: String, content: String) -> AnyPublisher<Void, STARGRAMError> {
-        return remoteFeedDataSource.createComment(.init(
-            feedId: feedId,
-            content: content
-        ))
-        .mapError {
-            print($0.response?.statusCode ?? 0)
-            return .badRequest
-        }
-        .eraseToAnyPublisher()
+        return remoteFeedDataSource.createComment(feedId, content)
+            .mapError { moyaError -> STARGRAMError in
+                print(moyaError)
+                return .badRequest
+            }
+            .eraseToAnyPublisher()
     }
 
     func patchComment(
@@ -122,17 +119,17 @@ class FeedRepositoryImpl: FeedRepository {
         feedId: String,
         content: String
     ) -> AnyPublisher<Void, STARGRAMError> {
-        return remoteFeedDataSource.patchComment(
-            commentId,
-            .init(
-                feedId: feedId,
-                content: content
-            ))
-        .mapError {
-            print($0.response?.statusCode ?? 0)
-            return .badRequest
-        }
-        .eraseToAnyPublisher()
+        return remoteFeedDataSource.patchComment(feedId, commentId, content)
+            .mapError { moyaError -> STARGRAMError in
+                print(moyaError)
+                switch moyaError.response?.statusCode {
+                case 404:
+                    return .notFound
+                default:
+                    return .badRequest
+                }
+            }
+            .eraseToAnyPublisher()
     }
 
     func deleteComment(commentId: Int) -> AnyPublisher<Void, STARGRAMError> {

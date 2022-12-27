@@ -9,8 +9,8 @@ enum FeedAPI {
     case uploadImage(_ images: [Data])
     case fetchFeeds
     case fetchFeedDetail(_ feedId: String)
-    case createComment(_ request: CommentRequest)
-    case patchComment(_ commentId: Int, _ request: CommentRequest)
+    case createComment(_ feedId: String, _ comment: String)
+    case patchComment(_ feedId: String, _ commentId: Int, _ comment: String)
     case deleteComment(_ commentId: Int)
     case like(_ feedId: String)
     case unLike(_ feedId: String)
@@ -34,10 +34,10 @@ extension FeedAPI: StarGramAPI {
             return "/likes/\(feedId)"
         case .favorite(let feedId), .unFavorite(let feedId):
             return "/bookmark/\(feedId)"
-        case .patchComment(let commentId, _), .deleteComment(let commentId):
+        case .patchComment(_, let commentId, _), .deleteComment(let commentId):
             return "/comments/\(commentId)"
-        case .createComment:
-            return "/comments"
+        case .createComment(let feedId, _):
+            return "/comments/\(feedId)"
         case .fetchFeeds:
             return "/list"
         default:
@@ -64,8 +64,13 @@ extension FeedAPI: StarGramAPI {
             return .requestJSONEncodable(request)
         case .patchFeed(_, let request):
             return .requestJSONEncodable(request)
-        case .createComment(let request), .patchComment(_, let request):
-            return .requestJSONEncodable(request)
+        case .createComment(_, let comment), .patchComment(_, _, let comment):
+            return .requestParameters(
+                parameters: [
+                    "content": comment
+                ],
+                encoding: JSONEncoding.default
+            )
         case .uploadImage(let images):
             var multiformData = [MultipartFormData]()
             for image in images {

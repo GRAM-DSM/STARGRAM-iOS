@@ -43,15 +43,16 @@ final class RemoteFeedDataSource: MoyaProvider<FeedAPI> {
             .eraseToAnyPublisher()
     }
 
-    func createComment(_ request: CommentRequest) -> AnyPublisher<Void, MoyaError> {
-        return self.requestVoidPublisher(.createComment(request))
+    func createComment(_ feedId: String, _ comment: String) -> AnyPublisher<Void, MoyaError> {
+        return self.requestVoidPublisher(.createComment(feedId, comment))
     }
 
     func patchComment(
+        _ feedId: String,
         _ commentId: Int,
-        _ request: CommentRequest
+        _ comment: String
     ) -> AnyPublisher<Void, MoyaError> {
-        return self.requestVoidPublisher(.patchComment(commentId, request))
+        return self.requestVoidPublisher(.patchComment(feedId, commentId, comment))
     }
 
     func deleteComment(_ commentId: Int) -> AnyPublisher<Void, MoyaError> {
